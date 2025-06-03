@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>賽程表 | 2025第十二屆國北烤雞盃混合排球賽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous">
+        </script>
+    <script src="scripts/schedule.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/schedule.css">
+</head>
+
+<body class="bg-gradient-to-br from-orange-50 to-amber-100 min-h-screen">
+    <nav class="navbar">
+        <div class="logo">2025國北烤雞盃混合排球賽</div>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+        <label for="nav-toggle" class="hamburger" aria-label="開啟選單">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+		<div class="nav-links">
+			<a href="index.html">首頁</a>
+			<a href="score.html">即時比分</a>
+			<a href="schedule.html">賽程表</a>
+			<a href="#">對戰成績</a>
+			<a href="#">參賽名單</a>
+			<a href="#">關於比賽</a>
+		</div>
+		<div class="mobile-menu">
+			<a href="index.html">首頁</a>
+			<a href="score.html">即時比分</a>
+			<a href="schedule.html">賽程表</a>
+			<a href="#">對戰成績</a>
+			<a href="#">參賽名單</a>
+			<a href="#">關於比賽</a>
+		</div>
+    </nav>
+
+    <div class="container mx-auto p-4 md:p-8">
+        <!-- 循環賽卡片 start -->
+        <div class="tournament-card bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 relative mx-auto mb-8"
+            style="max-width: 1200px;">
+            <div class="text-center font-extrabold text-2xl text-gray-800 mb-4 border-b-2 border-orange-200 pb-2">小組循環賽
+            </div>
+            <div class="round-robin-groups-container">
+                <div class="round-robin-group-wrapper">
+                    <h3>A 組</h3>
+                        <div class="round-robin-triangle-wrapper">
+                            <div class="connection-line" style="top: 9.24%; left: 50%; width: 39.04%; transform: rotate(115.28deg);"></div>
+                            <div class="connection-line" style="top: 50%; left: 33.335%; width: 39.04%; transform: rotate(115.28deg);"></div>
+
+                            <div class="connection-line" style="top: 9.24%; left: 50%; width: 39.04%; transform: rotate(64.72deg);"></div>
+                            <div class="connection-line" style="top: 50%; left: 66.665%; width: 39.04%; transform: rotate(64.72deg);"></div>
+
+                            <div class="connection-line" style="top: 90.76%; left: 16.67%; width: 33.33%; transform: rotate(0deg);"></div>
+                            <div class="connection-line" style="top: 90.76%; left: 50%; width: 33.33%; transform: rotate(0deg);"></div>
+
+                            <div class="triangle-node team-node vertex-top">隊伍 A1</div>
+                            <div class="triangle-node team-node vertex-bottom-left">隊伍 A2</div>
+                            <div class="triangle-node team-node vertex-bottom-right">隊伍 A3</div>
+
+                            <div class="triangle-node score-node score-top-left-side">0:0</div>
+                            <div class="triangle-node score-node score-top-right-side">10:5</div>
+                            <div class="triangle-node score-node score-bottom-side">0:0</div>
+
+                            <div class="division-label">數資系</div>
+                        </div>
+                </div>
+                <div class="round-robin-group-wrapper">
+                    <h3>B 組</h3>
+                    <div class="round-robin-triangle-wrapper">
+                        <div class="connection-line" style="top: 9.24%; left: 50%; width: 39.04%; transform: rotate(115.28deg);"></div>
+                        <div class="connection-line" style="top: 50%; left: 33.335%; width: 39.04%; transform: rotate(115.28deg);"></div>
+
+                        <div class="connection-line" style="top: 9.24%; left: 50%; width: 39.04%; transform: rotate(64.72deg);"></div>
+                        <div class="connection-line" style="top: 50%; left: 66.665%; width: 39.04%; transform: rotate(64.72deg);"></div>
+
+                        <div class="connection-line" style="top: 90.76%; left: 16.67%; width: 33.33%; transform: rotate(0deg);"></div>
+                        <div class="connection-line" style="top: 90.76%; left: 50%; width: 33.33%; transform: rotate(0deg);"></div>
+
+                        <div class="triangle-node team-node vertex-top">隊伍 B1</div>
+                        <div class="triangle-node team-node vertex-bottom-left">隊伍 B2</div>
+                        <div class="triangle-node team-node vertex-bottom-right">隊伍 B3</div>
+
+                        <div class="triangle-node score-node score-top-left-side">0:0</div>
+                        <div class="triangle-node score-node score-top-right-side">10:5</div>
+                        <div class="triangle-node score-node score-bottom-side">0:0</div>
+
+                        <div class="division-label">數資系</div>
+                    </div>
+                </div>
+                <div class="round-robin-group-wrapper">
+                    <h3>C 組</h3>
+                    <div class="round-robin-triangle-wrapper">
+                        <div class="connection-line" style="top: 9.24%; left: 50%; width: 39.04%; transform: rotate(115.28deg);"></div>
+                        <div class="connection-line" style="top: 50%; left: 33.335%; width: 39.04%; transform: rotate(115.28deg);"></div>
+
+                        <div class="connection-line" style="top: 9.24%; left: 50%; width: 39.04%; transform: rotate(64.72deg);"></div>
+                        <div class="connection-line" style="top: 50%; left: 66.665%; width: 39.04%; transform: rotate(64.72deg);"></div>
+
+                        <div class="connection-line" style="top: 90.76%; left: 16.67%; width: 33.33%; transform: rotate(0deg);"></div>
+                        <div class="connection-line" style="top: 90.76%; left: 50%; width: 33.33%; transform: rotate(0deg);"></div>
+
+                        <div class="triangle-node team-node vertex-top">隊伍 C1</div>
+                        <div class="triangle-node team-node vertex-bottom-left">隊伍 C2</div>
+                        <div class="triangle-node team-node vertex-bottom-right">隊伍 C3</div>
+
+                        <div class="triangle-node score-node score-top-left-side">0:0</div>
+                        <div class="triangle-node score-node score-top-right-side">10:5</div>
+                        <div class="triangle-node score-node score-bottom-side">0:0</div>
+
+                        <div class="division-label">數資系</div>
+                    </div>
+                </div>
+                <div class="round-robin-group-wrapper">
+                    <h3>D 組</h3>
+                    <div class="round-robin-triangle-wrapper">
+                        <div class="connection-line" style="top: 9.24%; left: 50%; width: 39.04%; transform: rotate(115.28deg);"></div>
+                        <div class="connection-line" style="top: 50%; left: 33.335%; width: 39.04%; transform: rotate(115.28deg);"></div>
+
+                        <div class="connection-line" style="top: 9.24%; left: 50%; width: 39.04%; transform: rotate(64.72deg);"></div>
+                        <div class="connection-line" style="top: 50%; left: 66.665%; width: 39.04%; transform: rotate(64.72deg);"></div>
+
+                        <div class="connection-line" style="top: 90.76%; left: 16.67%; width: 33.33%; transform: rotate(0deg);"></div>
+                        <div class="connection-line" style="top: 90.76%; left: 50%; width: 33.33%; transform: rotate(0deg);"></div>
+
+                        <div class="triangle-node team-node vertex-top">隊伍 D1</div>
+                        <div class="triangle-node team-node vertex-bottom-left">隊伍 D2</div>
+                        <div class="triangle-node team-node vertex-bottom-right">隊伍 D3</div>
+
+                        <div class="triangle-node score-node score-top-left-side">0:0</div>
+                        <div class="triangle-node score-node score-top-right-side">10:5</div>
+                        <div class="triangle-node score-node score-bottom-side">0:0</div>
+
+                        <div class="division-label">數資系</div>
+                    </div>
+                </div>
+                <div class="round-robin-group-wrapper">
+                    <h3>E 組</h3>
+                    <div class="round-robin-triangle-wrapper">
+                        <div class="connection-line" style="top: 9.24%; left: 50%; width: 39.04%; transform: rotate(115.28deg);"></div>
+                        <div class="connection-line" style="top: 50%; left: 33.335%; width: 39.04%; transform: rotate(115.28deg);"></div>
+
+                        <div class="connection-line" style="top: 9.24%; left: 50%; width: 39.04%; transform: rotate(64.72deg);"></div>
+                        <div class="connection-line" style="top: 50%; left: 66.665%; width: 39.04%; transform: rotate(64.72deg);"></div>
+
+                        <div class="connection-line" style="top: 90.76%; left: 16.67%; width: 33.33%; transform: rotate(0deg);"></div>
+                        <div class="connection-line" style="top: 90.76%; left: 50%; width: 33.33%; transform: rotate(0deg);"></div>
+
+                        <div class="triangle-node team-node vertex-top">隊伍 E1</div>
+                        <div class="triangle-node team-node vertex-bottom-left">隊伍 E2</div>
+                        <div class="triangle-node team-node vertex-bottom-right">隊伍 E3</div>
+
+                        <div class="triangle-node score-node score-top-left-side">0:0</div>
+                        <div class="triangle-node score-node score-top-right-side">10:5</div>
+                        <div class="triangle-node score-node score-bottom-side">0:0</div>
+
+                        <div class="division-label">數資系</div>
+                    </div>
+                </div>
+                <div class="round-robin-group-wrapper">
+                    <h3>F 組</h3>
+                    <div class="round-robin-triangle-wrapper">
+                        <div class="connection-line" style="top: 9.24%; left: 50%; width: 39.04%; transform: rotate(115.28deg);"></div>
+                        <div class="connection-line" style="top: 50%; left: 33.335%; width: 39.04%; transform: rotate(115.28deg);"></div>
+
+                        <div class="connection-line" style="top: 9.24%; left: 50%; width: 39.04%; transform: rotate(64.72deg);"></div>
+                        <div class="connection-line" style="top: 50%; left: 66.665%; width: 39.04%; transform: rotate(64.72deg);"></div>
+
+                        <div class="connection-line" style="top: 90.76%; left: 16.67%; width: 33.33%; transform: rotate(0deg);"></div>
+                        <div class="connection-line" style="top: 90.76%; left: 50%; width: 33.33%; transform: rotate(0deg);"></div>
+
+                        <div class="triangle-node team-node vertex-top">隊伍 F1</div>
+                        <div class="triangle-node team-node vertex-bottom-left">隊伍 F2</div>
+                        <div class="triangle-node team-node vertex-bottom-right">隊伍 F3</div>
+
+                        <div class="triangle-node score-node score-top-left-side">0:0</div>
+                        <div class="triangle-node score-node score-top-right-side">10:5</div>
+                        <div class="triangle-node score-node score-bottom-side">0:0</div>
+
+                        <div class="division-label">數資系</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 循環賽卡片 end -->
+        <div class="tournament-card bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 relative mx-auto"
+            style="max-width: 1200px;">
+            <div class="text-center font-extrabold text-2xl text-gray-800 mb-4 border-b-2 border-orange-200 pb-2">複決賽
+            </div>
+            <div class="tournament-scroll">
+                <div class="tournament-container">
+                    <div class="tree">
+                        <ul>
+                            <li>
+                                <div class="node-content">
+                                    <div class="winner-name">冠軍戰</div>
+                                    <div class="match-box">
+                                        <div class="team">
+                                            <span class="name">四強A勝者</span>
+                                            <span class="score">0</span>
+                                        </div>
+                                        <div class="team">
+                                            <span class="name">四強B勝者</span>
+                                            <span class="score opponent">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-4">
+                                <div class="node-content">
+                                    <div class="winner-name">季軍戰</div>
+                                    <div class="match-box">
+                                        <div class="team">
+                                            <span class="name">四強A敗者</span>
+                                            <span class="score">0</span>
+                                        </div>
+                                        <div class="team">
+                                            <span class="name">四強B敗者</span>
+                                            <span class="score opponent">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="node-content">
+                                            <div class="winner-name">四強賽A</div>
+                                            <div class="match-box">
+                                                <div class="team">
+                                                    <span class="name">八強賽A勝者</span>
+                                                    <span class="score">0</span>
+                                                </div>
+                                                <div class="team">
+                                                    <span class="name">八強賽B勝者</span>
+                                                    <span class="score opponent">0</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul>
+                                            <li>
+                                                <div class="node-content">
+                                                    <div class="winner-name">八強賽A</div>
+                                                    <div class="match-box">
+                                                        <div class="team">
+                                                            <span class="name">種子A</span>
+                                                            <span class="score">0</span></div>
+                                                        <div class="team">
+                                                            <span class="name">十二強A勝者</span>
+                                                            <span class="score opponent">0</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ul>
+                                                    <li>
+                                                        <div class="node-content">
+                                                            <div class="winner-name">種子A</div>
+                                                            <div class="match-box">
+                                                                <div class="team">
+                                                                    <span class="name">隊伍A</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="node-content">
+                                                            <div class="winner-name">十二強賽A</div>
+                                                            <div class="match-box">
+                                                                <div class="team">
+                                                                    <span class="name">隊伍 1</span>
+                                                                    <span class="score">0</span></div>
+                                                                <div class="team">
+                                                                    <span class="name">隊伍 2</span>
+                                                                    <span class="score opponent">0</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <div class="node-content">
+                                                    <div class="winner-name">八強賽B</div>
+                                                    <div class="match-box">
+                                                        <div class="team">
+                                                            <span class="name">十二強B勝者</span>
+                                                            <span class="score">0</span></div>
+                                                        <div class="team">
+                                                            <span class="name">種子B</span>
+                                                            <span class="score opponent">0</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ul>
+                                                    <li>
+                                                        <div class="node-content">
+                                                            <div class="winner-name">十二強賽B</div>
+                                                            <div class="match-box">
+                                                                <div class="team">
+                                                                    <span class="name">隊伍 3</span>
+                                                                    <span class="score">0</span>
+                                                                </div>
+                                                                <div class="team">
+                                                                    <span class="name">隊伍 4</span>
+                                                                    <span class="score opponent">0</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="node-content">
+                                                            <div class="winner-name">種子B</div>
+                                                            <div class="match-box">
+                                                                <div class="team">
+                                                                    <span class="name">隊伍B</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="node-content">
+                                            <div class="winner-name">四強賽B</div>
+                                            <div class="match-box">
+                                                <div class="team">
+                                                    <span class="name">八強賽C勝者</span>
+                                                    <span class="score">0</span></div>
+                                                <div class="team">
+                                                    <span class="name">八強賽D勝者</span>
+                                                    <sapn class="score opponent">0</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul>
+                                            <li>
+                                                <div class="node-content">
+                                                    <div class="winner-name">八強賽C</div>
+                                                    <div class="match-box">
+                                                        <div class="team">
+                                                            <span class="name">種子C</span>
+                                                            <span class="score">0</span>
+                                                        </div>
+                                                        <div class="team">
+                                                            <span class="name">十二強C勝者</span>
+                                                            <span class="score opponent">0</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ul>
+                                                    <li>
+                                                        <div class="node-content">
+                                                            <div class="winner-name">種子C</div>
+                                                            <div class="match-box">
+                                                                <div class="team">
+                                                                    <span class="name">隊伍C</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="node-content">
+                                                            <div class="winner-name">十二強賽C</div>
+                                                            <div class="match-box">
+                                                                <div class="team">
+                                                                    <span class="name">隊伍 5</span>
+                                                                    <span class="score">0</span>
+                                                                </div>
+                                                                <div class="team">
+                                                                    <span class="name">隊伍 6</span>
+                                                                    <span class="score opponent">0</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <div class="node-content">
+                                                    <div class="winner-name">八強賽D</div>
+                                                    <div class="match-box">
+                                                        <div class="team">
+                                                            <span class="name">十二強D勝者</span>
+                                                            <sp class="score">0</span>
+                                                        </div>
+                                                        <div class="team">
+                                                            <span class="name">種子D</span>
+                                                            <sp class="score opponent">0</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ul>
+                                                    <li>
+                                                        <div class="node-content">
+                                                            <div class="winner-name">十二強賽D</div>
+                                                            <div class="match-box">
+                                                                <div class="team">
+                                                                    <span class="name">隊伍 7</span>
+                                                                    <span class="score">0</span>
+                                                                </div>
+                                                                <div class="team">
+                                                                    <span class="name">隊伍 8</span>
+                                                                    <span class="score opponent">0</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="node-content">
+                                                            <div class="winner-name">種子D</div>
+                                                            <div class="match-box">
+                                                                <div class="team">
+                                                                    <span class="name">隊伍D</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

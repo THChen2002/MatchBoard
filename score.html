@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>即時比分 | 2025第十二屆國北烤雞盃混合排球賽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous">
+    </script>
+    <script src="scripts/score.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body class="bg-gradient-to-br from-orange-50 to-amber-100 min-h-screen">
+    <nav class="navbar">
+        <div class="logo">2025國北烤雞盃混合排球賽</div>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+        <label for="nav-toggle" class="hamburger" aria-label="開啟選單">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+		<div class="nav-links">
+			<a href="index.html">首頁</a>
+			<a href="score.html">即時比分</a>
+			<a href="schedule.html">賽程表</a>
+			<a href="#">對戰成績</a>
+			<a href="#">參賽名單</a>
+			<a href="#">關於比賽</a>
+		</div>
+		<div class="mobile-menu">
+			<a href="index.html">首頁</a>
+			<a href="score.html">即時比分</a>
+			<a href="schedule.html">賽程表</a>
+			<a href="#">對戰成績</a>
+			<a href="#">參賽名單</a>
+			<a href="#">關於比賽</a>
+		</div>
+    </nav>
+
+    <div id="matches-container" class="container mx-auto p-4 md:p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Match data will be dynamically inserted here -->
+    </div>
+
+    <!-- Loading Animation -->
+    <div id="loading-container" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 shadow-2xl flex flex-col items-center">
+            <div class="relative">
+                <div class="w-16 h-16 border-4 border-orange-200 rounded-full animate-spin"></div>
+                <div class="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin absolute top-0 left-0"></div>
+            </div>
+            <div class="mt-4 text-xl font-semibold text-gray-700">載入比賽資料中...</div>
+            <div class="mt-2 text-sm text-gray-500">請稍候</div>
+        </div>
+    </div>
+</body>
+
+</html>
