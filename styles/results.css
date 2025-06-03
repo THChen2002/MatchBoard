@@ -1,0 +1,305 @@
+/* 錦標賽容器 */
+.tournament-container {
+    text-align: center;
+    padding: 20px;
+}
+
+/* 循環賽區塊樣式 */
+.round-robin-section {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+    background-color: transparent;
+    border: 2px solid #fb923c;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+.round-robin-section h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #b45309;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 循環賽組別樣式 */
+.round-robin-group {
+    background: linear-gradient(135deg, #ffffff 0%, #fef7ec 100%);
+    border: 2px solid #fb923c;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 32px;
+    box-shadow: 0 8px 25px rgba(251, 146, 60, 0.15);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.round-robin-group::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #fb923c 0%, #f97316 50%, #ea580c 100%);
+}
+
+.round-robin-group:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(251, 146, 60, 0.25);
+}
+
+.round-robin-group h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #7c2d12;
+    margin-bottom: 20px;
+    border-bottom: none;
+    padding-bottom: 0;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.round-robin-group h3::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #fb923c 0%, #f97316 100%);
+    border-radius: 2px;
+}
+
+/* 比賽項目樣式 */
+.round-robin-match {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #fed7aa;
+    background: linear-gradient(135deg, #fff 0%, #fef7ec 100%);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(251, 146, 60, 0.1);
+    gap: 32px;
+}
+
+.round-robin-match:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(251, 146, 60, 0.2);
+}
+
+.round-robin-match:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* 隊伍容器和隊伍框 */
+.team-container {
+    display: flex;
+    gap: 12px;
+    flex: 2;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.team-box {
+    background: linear-gradient(135deg, #fef7ec 0%, #fed7aa 100%);
+    border: 2px solid #f97316;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #7c2d12;
+    text-align: center;
+    min-width: 100px;
+    box-shadow: 0 2px 6px rgba(249, 115, 22, 0.15);
+    transition: all 0.3s ease;
+}
+
+.team-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(249, 115, 22, 0.25);
+    border-color: #ea580c;
+}
+
+/* 比分容器和比分框 */
+.score-container {
+    display: flex;
+    gap: 12px;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.score-box {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #ffffff 0%, #fef3e2 100%);
+    border: 2px solid #fb923c;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: #ea580c;
+    box-shadow: 0 2px 8px rgba(251, 146, 60, 0.15);
+    transition: all 0.3s ease;
+}
+
+.score-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(251, 146, 60, 0.25);
+}
+
+/* 比賽狀態樣式 */
+.round-robin-match .status {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 20px;
+    border: none;
+    flex: 0 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    min-width: 90px;
+}
+
+.round-robin-match .status.completed {
+    color: #ffffff;
+    background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+}
+
+.round-robin-match .status.upcoming {
+    color: #ffffff;
+    background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+}
+
+/* 循環賽隊伍列表 */
+.round-robin-teams-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+    margin: 30px 0 40px 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #fef7ec 0%, #fff 100%);
+    border-radius: 16px;
+    border: 1px solid #fed7aa;
+}
+
+.round-robin-team-card {
+    background: linear-gradient(135deg, #ffffff 0%, #fef3e2 100%);
+    border: 2px solid #fb923c;
+    border-radius: 12px;
+    padding: 16px 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(251, 146, 60, 0.1);
+    font-weight: 700;
+    color: #7c2d12;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.round-robin-team-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(251, 146, 60, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.round-robin-team-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(251, 146, 60, 0.25);
+    border-color: #ea580c;
+}
+
+.round-robin-team-card:hover::before {
+    left: 100%;
+}
+
+
+@media (max-width: 768px) {
+    .tournament-container {
+        padding: 10px;
+    }
+    
+    .round-robin-section {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .round-robin-teams-list {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .round-robin-team-card {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .round-robin-group {
+        padding: 20px;
+        margin-bottom: 24px;
+    }
+    
+    .round-robin-match {
+        padding: 16px;
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+    }
+    
+    .team-container {
+        flex: none;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .team-box {
+        min-width: 80px;
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .score-container {
+        flex: none;
+        justify-content: center;
+    }
+    
+    .score-box {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .round-robin-match .status {
+        align-self: center;
+        margin: 0;
+        flex: 0 0 auto;
+        min-width: 70px;
+    }
+
+    .round-robin-group h3 {
+        font-size: 1.3rem;
+        margin-bottom: 16px;
+    }
+} 
