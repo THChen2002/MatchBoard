@@ -30,7 +30,7 @@ function updateMarqueeDisplay() {
 function fetchMarqueeData() {
 	// 這裡可以替換為實際的API調用
 	$.ajax({
-	    url: 'https://script.google.com/macros/s/AKfycbxYnlqqRN_VmZNhsLkc6BZ09VBzaE23o-FkY9KeL0p8Zhh74-bp9CmaOdUrduhCRXeP/exec?type=marquee',
+	    url: 'https://script.google.com/macros/s/AKfycbwrf8osm_3pH2_E8cJGwUnXGqBqrcIZzLFrRCd2_HDpJlKLaPoJwRofMH06bY4S0aD2/exec?type=marquee',
 	    method: 'GET',
 	    success: function(data) {
             console.log('獲取跑馬燈資料成功:', data);
@@ -69,7 +69,7 @@ const announcementTypeMap = {
 // 從後端獲取公告數據
 function fetchAnnouncements() {
 	$.ajax({
-		url: 'https://script.google.com/macros/s/AKfycbxYnlqqRN_VmZNhsLkc6BZ09VBzaE23o-FkY9KeL0p8Zhh74-bp9CmaOdUrduhCRXeP/exec?type=announcements',
+		url: 'https://script.google.com/macros/s/AKfycbwrf8osm_3pH2_E8cJGwUnXGqBqrcIZzLFrRCd2_HDpJlKLaPoJwRofMH06bY4S0aD2/exec?type=announcements',
 		method: 'GET',
 		success: function(data) {
 			console.log('獲取公告資料成功:', data);

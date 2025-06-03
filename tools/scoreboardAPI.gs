@@ -9,11 +9,57 @@ function doGet(e) {
     return handleScore();
   } else if (type === 'results') {
     return handleResults();
+  } else if (type === 'teams') {
+    return handleTeams();
   } else {
     return ContentService.createTextOutput(
       JSON.stringify({ error: "Missing or invalid type." }, null, 2)
     ).setMimeType(ContentService.MimeType.JSON);
   }
+}
+
+// 跑馬燈
+function handleMarquee(){
+  const ss = SpreadsheetApp.openById("1wcNSyGv0QQEnjr-5UHOqsmnniSeUSX2F1XNYW23ISZs");
+  const sheet = ss.getSheetById(1594512537);
+  const data = sheet.getRange("B1").getValue();
+  const results = {
+    text: data
+  };
+
+  return ContentService
+    .createTextOutput(JSON.stringify(results, null, 2))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// 公告
+function handleAnnouncements(){
+  const ss = SpreadsheetApp.openById("1wcNSyGv0QQEnjr-5UHOqsmnniSeUSX2F1XNYW23ISZs");
+  const sheet = ss.getSheetById(1594512537);
+  const lastRow = sheet.getLastRow();
+  const range = sheet.getRange(`A3:D${lastRow}`);
+  const values = range.getValues();
+
+  const announcements = [];
+
+  for (let i = 0; i < values.length; i++) {
+    let [date, type, title, content] = values[i];
+    date = Utilities.formatDate(date, Session.getScriptTimeZone(), "yyyy/MM/dd");
+
+    // 跳過空白列（標題或日期為空）
+    if (!date || !title) continue;
+
+    announcements.push({
+      date,     // 例如：2025/01/20
+      type,     // 例如：重要、提醒、一般
+      title,    // 例如：比賽報名截止日提醒
+      content   // 公告內容文字
+    });
+  }
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ announcements }, null, 2))
+    .setMimeType(ContentService.MimeType.JSON);
 }
 
 // 即時比分
@@ -99,47 +145,38 @@ function handleResults() {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-// 跑馬燈
-function handleMarquee(){
+// 參賽名單
+function handleTeams() {
   const ss = SpreadsheetApp.openById("1wcNSyGv0QQEnjr-5UHOqsmnniSeUSX2F1XNYW23ISZs");
-  const sheet = ss.getSheetById(1594512537);
-  const data = sheet.getRange("B1").getValue();
-  const results = {
-    text: data
-  };
+  const sheet = ss.getSheetById(1021693251);
+  const data = sheet.getDataRange().getValues();
 
-  return ContentService
-    .createTextOutput(JSON.stringify(results, null, 2))
-    .setMimeType(ContentService.MimeType.JSON);
-}
+  const teams = [];
 
-// 公告
-function handleAnnouncements(){
-  const ss = SpreadsheetApp.openById("1wcNSyGv0QQEnjr-5UHOqsmnniSeUSX2F1XNYW23ISZs");
-  const sheet = ss.getSheetById(1594512537);
-  const lastRow = sheet.getLastRow();
-  const range = sheet.getRange(`A3:D${lastRow}`);
-  const values = range.getValues();
+  for (let col = 0; col < data[0].length; col += 4) {
+    const teamName = data[0][col]; // 隊名
+    const department = data[1][col] //系所
+    const members = [];
 
-  const announcements = [];
+    for (let row = 2; row < data.length; row++) {
+      const number = data[row][col];
+      const name = data[row][col + 1];
+      const gender = data[row][col + 2];
+      const status = data[row][col + 3];
 
-  for (let i = 0; i < values.length; i++) {
-    let [date, type, title, content] = values[i];
-    date = Utilities.formatDate(date, Session.getScriptTimeZone(), "yyyy/MM/dd");
+      if (!name || name.toString().trim() === "") continue;
 
-    // 跳過空白列（標題或日期為空）
-    if (!date || !title) continue;
+      members.push({ number, name, gender, status });
+    }
 
-    announcements.push({
-      date,     // 例如：2025/01/20
-      type,     // 例如：重要、提醒、一般
-      title,    // 例如：比賽報名截止日提醒
-      content   // 公告內容文字
-    });
+    if (members.length > 0) {
+      teams.push({ team: teamName, department, members });
+    }
   }
 
   return ContentService
-    .createTextOutput(JSON.stringify({ announcements }, null, 2))
+    .createTextOutput(JSON.stringify({ teams }, null, 2))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
 

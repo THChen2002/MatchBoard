@@ -8,7 +8,7 @@ function fetchMatchData() {
 	}
 
 	$.ajax({
-		url: "https://script.google.com/macros/s/AKfycbxYnlqqRN_VmZNhsLkc6BZ09VBzaE23o-FkY9KeL0p8Zhh74-bp9CmaOdUrduhCRXeP/exec?type=score",
+		url: "https://script.google.com/macros/s/AKfycbwrf8osm_3pH2_E8cJGwUnXGqBqrcIZzLFrRCd2_HDpJlKLaPoJwRofMH06bY4S0aD2/exec?type=score",
 		data: {
 			"no": 1,
 		},

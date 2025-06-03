@@ -1,0 +1,294 @@
+/* ==========================================================================
+   參賽名單頁面樣式
+   ========================================================================== */
+
+/* 隊伍卡片容器 */
+.team-card {
+	background: #ffffff;
+	border-radius: 1rem;
+	padding: 1.5rem;
+	border: 2px solid #f3f4f6;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+	transition: all 0.3s ease;
+	margin-bottom: 1.5rem;
+}
+
+.team-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+	border-color: #f59e0b;
+}
+
+/* 隊伍標題區域 */
+.team-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 2px solid #f59e0b;
+}
+
+.team-name {
+	font-size: 1.875rem;
+	font-weight: 700;
+	color: #1f2937;
+	margin: 0;
+}
+
+/* 系所標籤 */
+.department-tag {
+	font-size: 0.875rem;
+	font-weight: 500;
+	padding: 0.5rem 1rem;
+	border-radius: 2rem;
+	color: white;
+	white-space: nowrap;
+	letter-spacing: 0.025em;
+}
+
+.department-tag-orange {
+	background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+/* 隊長資訊 */
+.captain-info {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 1.5rem;
+	font-size: 1.125rem;
+}
+
+.captain-label {
+	color: #6b7280;
+	font-weight: 500;
+}
+
+.captain-name {
+	color: #1f2937;
+	font-weight: 600;
+}
+
+/* 隊員網格 */
+.members-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 0.75rem;
+}
+
+/* 隊員項目 */
+.member-item {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.875rem 1rem;
+	border-radius: 0.75rem;
+	border: 2px solid transparent;
+	transition: all 0.3s ease;
+	position: relative;
+}
+
+.member-item:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 隊員顏色區分 */
+.member-blue {
+	background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+	border-color: #93c5fd;
+}
+
+.member-blue:hover {
+	border-color: #3b82f6;
+}
+
+.member-pink {
+	background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+	border-color: #f9a8d4;
+}
+
+.member-pink:hover {
+	border-color: #ec4899;
+}
+
+/* 隊員號碼 */
+.member-number {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	font-weight: 700;
+	font-size: 0.875rem;
+	flex-shrink: 0;
+}
+
+.member-blue .member-number {
+	background: #3b82f6;
+	color: white;
+}
+
+.member-pink .member-number {
+	background: #ec4899;
+	color: white;
+}
+
+/* 隊員姓名 */
+.member-name {
+	font-weight: 600;
+	color: #1f2937;
+	flex: 1;
+	min-width: 0;
+}
+
+/* 隊員狀態 */
+.member-status {
+	font-size: 0.75rem;
+	font-weight: 500;
+	padding: 0.25rem 0.75rem;
+	border-radius: 1rem;
+	flex-shrink: 0;
+}
+
+.status-studying {
+	background: #dcfce7;
+	color: #166534;
+	border: 1px solid #bbf7d0;
+}
+
+.status-working {
+	background: #fef3c7;
+	color: #92400e;
+	border: 1px solid #fde68a;
+}
+
+/* 載入動畫 */
+.loading-shimmer {
+	background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+	background-size: 200% 100%;
+	animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
+}
+
+/* 空狀態 */
+.empty-state {
+	text-align: center;
+	padding: 3rem 1rem;
+	color: #6b7280;
+}
+
+.empty-state svg {
+	margin: 0 auto 1rem;
+	opacity: 0.5;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+	.team-header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.75rem;
+	}
+	
+	.team-name {
+		font-size: 1.5rem;
+	}
+	
+	.members-grid {
+		grid-template-columns: 1fr;
+	}
+	
+	.member-item {
+		gap: 0.5rem;
+		padding: 0.75rem;
+	}
+	
+	.captain-info {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.25rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.team-card {
+		padding: 1rem;
+	}
+	
+	.team-name {
+		font-size: 1.25rem;
+	}
+	
+	.department-tag {
+		font-size: 0.75rem;
+		padding: 0.375rem 0.75rem;
+	}
+	
+	.member-item {
+		gap: 0.5rem;
+		padding: 0.625rem 0.75rem;
+	}
+	
+	.member-number {
+		width: 1.75rem;
+		height: 1.75rem;
+		font-size: 0.75rem;
+	}
+	
+	.member-name {
+		font-size: 0.875rem;
+	}
+}
+
+/* 動畫效果 */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.team-card {
+	animation: fadeInUp 0.6s ease-out;
+}
+
+.team-card:nth-child(1) { animation-delay: 0.1s; }
+.team-card:nth-child(2) { animation-delay: 0.2s; }
+.team-card:nth-child(3) { animation-delay: 0.3s; }
+.team-card:nth-child(4) { animation-delay: 0.4s; }
+.team-card:nth-child(5) { animation-delay: 0.5s; }
+.team-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* 滾動條樣式 */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: #f1f5f9;
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #cbd5e1;
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #94a3b8;
+} 
