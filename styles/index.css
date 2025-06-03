@@ -1,0 +1,34 @@
+@keyframes marquee {
+	0% { transform: translateX(100%); }
+	100% { transform: translateX(-100%); }
+}
+
+.marquee-text {
+	animation: marquee 20s linear infinite;
+	white-space: nowrap;
+}
+
+.marquee-container {
+	overflow: hidden;
+	position: relative;
+	min-height: 1.5rem;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+	.marquee-text {
+		animation: marquee 25s linear infinite;
+		font-size: 1rem;
+	}
+	.announcement-button {
+		min-width: auto;
+		padding: 0.25rem 0.5rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.marquee-text {
+		animation: marquee 30s linear infinite;
+		font-size: 0.875rem;
+	}
+} 

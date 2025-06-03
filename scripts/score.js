@@ -1,28 +1,27 @@
-// Flag to track if this is the first load
+// 紀錄是否為第一次載入
 let isFirstLoad = true;
 
 function fetchMatchData() {
-	// Show loading animation only on first load
+	// 第一次載入時顯示loading動畫
 	if (isFirstLoad) {
 		$('#loading-container').show();
 	}
 
 	$.ajax({
-		url: "https://script.google.com/macros/s/AKfycbyJNW_9XAlrwWmGqeh6yqfXy2IN9ba9Q8XuqSwDRbJ8L5WDMySPWLjx1wtWNZNwiBbj/exec",
+		url: "https://script.google.com/macros/s/AKfycbxYnlqqRN_VmZNhsLkc6BZ09VBzaE23o-FkY9KeL0p8Zhh74-bp9CmaOdUrduhCRXeP/exec?type=score",
 		data: {
 			"no": 1,
 		},
 		success: function (response) {
-			// Hide loading animation only on first load
+			// 隱藏loading動畫（僅在第一次載入時）
 			if (isFirstLoad) {
 				$('#loading-container').hide();
 				isFirstLoad = false;
 			}
 			
 			if (response) {
-				// Assuming response is in the expected format
 				const $container = $('#matches-container');
-				$container.empty(); // Clear existing content
+				$container.empty();
 
 				let htmlContent = '';
 
@@ -77,18 +76,18 @@ function fetchMatchData() {
 					`;
 				});
 
-				$container.html(htmlContent); // Update the DOM once
+				$container.html(htmlContent);
 			}
 		},
 		error: function (error) {
-			// Hide loading animation on error (only on first load)
+			// 隱藏loading動畫（僅在第一次載入時）
 			if (isFirstLoad) {
 				$('#loading-container').hide();
 				isFirstLoad = false;
 			}
 			console.error('Error fetching data:', error);
 			
-			// Show error message only if no data is currently displayed
+			// 如果是第一次載入或容器為空，顯示錯誤提示
 			if (isFirstLoad || $('#matches-container').children().length === 0) {
 				const $container = $('#matches-container');
 				$container.html(`

@@ -1,0 +1,133 @@
+// 跑馬燈文字資料
+let marqueeData = {};
+
+// 設置跑馬燈文字
+function setMarqueeText(text) {
+	marqueeData.text = text;
+	updateMarqueeDisplay();
+}
+
+// 設置跑馬燈顯示狀態
+function setMarqueeVisible(visible) {
+	marqueeData.isVisible = visible;
+	updateMarqueeDisplay();
+}
+
+// 更新跑馬燈顯示
+function updateMarqueeDisplay() {
+	const $marqueeContainer = $('.marquee-container').parent().parent().parent();
+	const $marqueeText = $('.marquee-text');
+	
+	if (marqueeData.text) {
+		$marqueeText.text(marqueeData.text);
+		$marqueeContainer.show();
+	} else {
+		$marqueeContainer.hide();
+	}
+}
+
+// 從後端獲取跑馬燈數據（示例函數）
+function fetchMarqueeData() {
+	// 這裡可以替換為實際的API調用
+	$.ajax({
+	    url: 'https://script.google.com/macros/s/AKfycbxYnlqqRN_VmZNhsLkc6BZ09VBzaE23o-FkY9KeL0p8Zhh74-bp9CmaOdUrduhCRXeP/exec?type=marquee',
+	    method: 'GET',
+	    success: function(data) {
+            console.log('獲取跑馬燈資料成功:', data);
+	        setMarqueeText(data.text);
+	        setMarqueeVisible(true);
+	    },
+	    error: function(xhr, status, error) {
+	        console.error('獲取跑馬燈資料失敗:', error);
+	    }
+	});
+}
+
+// 公告資料
+let announcements = [];
+
+// 公告類型map
+const announcementTypeMap = {
+	"重要": {
+		typeClass: "bg-red-500",
+		bgClass: "bg-red-50 border-red-400"
+	},
+	"一般": {
+		typeClass: "bg-blue-500",
+		bgClass: "bg-blue-50 border-blue-400"
+	},
+	"活動": {
+		typeClass: "bg-green-500",
+		bgClass: "bg-green-50 border-green-400"
+	},
+	"提醒": {
+		typeClass: "bg-orange-500",
+		bgClass: "bg-orange-50 border-orange-400"
+	}
+};
+
+// 從後端獲取公告數據
+function fetchAnnouncements() {
+	$.ajax({
+		url: 'https://script.google.com/macros/s/AKfycbxYnlqqRN_VmZNhsLkc6BZ09VBzaE23o-FkY9KeL0p8Zhh74-bp9CmaOdUrduhCRXeP/exec?type=announcements',
+		method: 'GET',
+		success: function(data) {
+			console.log('獲取公告資料成功:', data);
+			announcements = data.announcements.map(item => {
+				// 根據類型映射class
+				const typeConfig = announcementTypeMap[item.type] || announcementTypeMap["一般"];
+				return {
+					...item,
+					typeClass: typeConfig.typeClass,
+					bgClass: typeConfig.bgClass
+				};
+			});
+			renderAllAnnouncements();
+		},
+		error: function(xhr, status, error) {
+			console.error('獲取公告資料失敗:', error);
+            // 渲染錯誤提示
+            const $listContainer = $('#announcementList');
+            $listContainer.empty();
+            const $errorElement = $('<div></div>')
+                .addClass('text-red-500 text-center p-4')
+                .text('無法獲取公告資料，請稍後再試。');
+            $listContainer.append($errorElement);
+		}
+	});
+}
+
+
+// 渲染所有公告
+function renderAllAnnouncements() {
+	const $listContainer = $('#announcementList');
+	$listContainer.empty();
+	
+	$.each(announcements, function(index, announcement) {
+		const $announcementElement = $('<div></div>')
+			.addClass(`border-l-4 ${announcement.bgClass} p-3 sm:p-4 rounded-r-lg`)
+			.html(`
+				<div class="flex items-start justify-between">
+					<div class="flex-1 min-w-0">
+						<div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-2">
+							<span class="${announcement.typeClass} text-white text-xs px-2 py-1 rounded self-start">${announcement.type}</span>
+							<span class="text-gray-500 text-xs sm:text-sm">${announcement.date}</span>
+						</div>
+						<h4 class="font-semibold text-gray-800 mb-1 text-sm sm:text-base">${announcement.title}</h4>
+						<p class="text-gray-600 text-xs sm:text-sm leading-relaxed">${announcement.content}</p>
+					</div>
+				</div>
+			`);
+		
+		$listContainer.append($announcementElement);
+	});
+}
+
+// 使用 jQuery 的文檔就緒事件
+$(document).ready(function() {
+	// 初始化跑馬燈
+	fetchMarqueeData();
+	
+	// 獲取並渲染公告
+	fetchAnnouncements();
+});
