@@ -1,22 +1,17 @@
 // 獲取隊伍資料
 function fetchTeamsData() {
-    $.ajax({
-        url: "https://script.google.com/macros/s/AKfycbwrf8osm_3pH2_E8cJGwUnXGqBqrcIZzLFrRCd2_HDpJlKLaPoJwRofMH06bY4S0aD2/exec?type=teams",
-        method: 'GET',
-        dataType: 'json',
-        success: function(response) {
-            $('#loading-container').hide();
-            const teams = response.teams.map(team => ({
-                ...team,
-                captain: team.members[0].name // 隊長是 members 的第一個
-            }));
-            renderTeams(teams);
-        },
-        error: function(error) {
-            $('#loading-container').hide();
-            console.error('Error fetching teams data:', error);
-            showEmptyState();
-        }
+    fetchData('teams', function(response) {
+        // console.log('獲取隊伍資料成功:', response);
+        $('#loading-container').hide();
+        const teams = response.teams.map(team => ({
+            ...team,
+            captain: team.members[0].name // 隊長是 members 的第一個
+        }));
+        renderTeams(teams);
+    }, function(xhr, status, error) {
+        $('#loading-container').hide();
+        console.error('獲取隊伍資料失敗:', error);
+        showEmptyState();
     });
 }
 
@@ -92,7 +87,6 @@ function showTeamsContainer() {
     $('#errorMessage').hide();
     $('#teamsContainer').show();
 }
-
 
 
 $(document).ready(function() {

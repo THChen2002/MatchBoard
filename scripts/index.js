@@ -26,20 +26,14 @@ function updateMarqueeDisplay() {
 	}
 }
 
-// 從後端獲取跑馬燈數據（示例函數）
+// 從後端獲取跑馬燈數據
 function fetchMarqueeData() {
-	// 這裡可以替換為實際的API調用
-	$.ajax({
-	    url: 'https://script.google.com/macros/s/AKfycbwrf8osm_3pH2_E8cJGwUnXGqBqrcIZzLFrRCd2_HDpJlKLaPoJwRofMH06bY4S0aD2/exec?type=marquee',
-	    method: 'GET',
-	    success: function(data) {
-            console.log('獲取跑馬燈資料成功:', data);
-	        setMarqueeText(data.text);
-	        setMarqueeVisible(true);
-	    },
-	    error: function(xhr, status, error) {
-	        console.error('獲取跑馬燈資料失敗:', error);
-	    }
+	fetchData('marquee', function(data) {
+		// console.log('獲取跑馬燈資料成功:', data);
+		setMarqueeText(data.text);
+		setMarqueeVisible(true);
+	}, function(xhr, status, error) {
+		console.error('獲取跑馬燈資料失敗:', error);
 	});
 }
 
@@ -68,35 +62,27 @@ const announcementTypeMap = {
 
 // 從後端獲取公告數據
 function fetchAnnouncements() {
-	$.ajax({
-		url: 'https://script.google.com/macros/s/AKfycbwrf8osm_3pH2_E8cJGwUnXGqBqrcIZzLFrRCd2_HDpJlKLaPoJwRofMH06bY4S0aD2/exec?type=announcements',
-		method: 'GET',
-		success: function(data) {
-			console.log('獲取公告資料成功:', data);
-			announcements = data.announcements.map(item => {
-				// 根據類型映射class
-				const typeConfig = announcementTypeMap[item.type] || announcementTypeMap["一般"];
-				return {
-					...item,
-					typeClass: typeConfig.typeClass,
-					bgClass: typeConfig.bgClass
-				};
-			});
-			renderAllAnnouncements();
-		},
-		error: function(xhr, status, error) {
-			console.error('獲取公告資料失敗:', error);
-            // 渲染錯誤提示
-            const $listContainer = $('#announcementList');
-            $listContainer.empty();
-            const $errorElement = $('<div></div>')
-                .addClass('text-red-500 text-center p-4')
-                .text('無法獲取公告資料，請稍後再試。');
-            $listContainer.append($errorElement);
-		}
+	fetchData('announcements', function(data) {
+		// console.log('獲取公告資料成功:', data);
+		announcements = data.announcements.map(item => {
+			const typeConfig = announcementTypeMap[item.type] || announcementTypeMap["一般"];
+			return {
+				...item,
+				typeClass: typeConfig.typeClass,
+				bgClass: typeConfig.bgClass
+			};
+		});
+		renderAllAnnouncements();
+	}, function(xhr, status, error) {
+		console.error('獲取公告資料失敗:', error);
+		const $listContainer = $('#announcementList');
+		$listContainer.empty();
+		const $errorElement = $('<div></div>')
+			.addClass('text-red-500 text-center p-4')
+			.text('無法獲取公告資料，請稍後再試。');
+		$listContainer.append($errorElement);
 	});
 }
-
 
 // 渲染所有公告
 function renderAllAnnouncements() {
