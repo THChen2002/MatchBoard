@@ -1,0 +1,358 @@
+/* 即時更新banner */
+.live-update-banner {
+	color: #1f2937;
+	border-radius: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.75rem;
+	max-width: 300px;
+	margin: 0.75rem auto 0 auto;
+}
+
+.live-indicator {
+	width: 12px;
+	height: 12px;
+	background-color: #ef4444;
+	border-radius: 50%;
+	animation: pulse-live 2s infinite;
+	box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+}
+
+.live-text {
+	font-weight: 600;
+	font-size: 0.95rem;
+	letter-spacing: 0.025em;
+	color: #1f2937;
+}
+
+/* 閃爍動畫 */
+@keyframes pulse-live {
+	0% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+	}
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+	}
+	100% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+	}
+}
+
+.fade-in-down {
+	animation: fade-in-down 0.6s ease-out;
+}
+
+
+/* 翻頁動畫 */
+@keyframes flipScore {
+	0% {
+		transform: perspective(400px) rotateY(0deg);
+	}
+	50% {
+		transform: perspective(400px) rotateY(90deg);
+		background-color: #fbbf24;
+		box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+	}
+	100% {
+		transform: perspective(400px) rotateY(0deg);
+	}
+}
+
+/* 高亮脈動動畫 */
+@keyframes pulseHighlight {
+	0% {
+		box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
+	}
+	70% {
+		box-shadow: 0 0 0 10px rgba(251, 191, 36, 0);
+	}
+	100% {
+		box-shadow: 0 0 0 0 rgba(251, 191, 36, 0);
+	}
+}
+
+/* 應用動畫的類別 */
+.score-flip {
+	animation: flipScore 0.8s ease-in-out;
+}
+
+.score-highlight {
+	animation: pulseHighlight 1.5s ease-out;
+}
+
+/* 確保動畫期間保持3D效果 */
+.score-circle {
+	transition: all 0.3s ease;
+	transform-style: preserve-3d;
+}
+
+/* 比賽卡片容器 */
+.match-card {
+	background-color: #ffffff;
+	border-radius: 1rem;
+	padding: 1rem;
+	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+	transition: all 0.3s ease-in-out;
+	transform: translateY(0);
+	position: relative;
+}
+
+.match-card:hover {
+	box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+	transform: translateY(-0.25rem);
+}
+
+/* 場地標題 */
+.field-title {
+	text-align: center;
+	font-weight: 800;
+	font-size: 1.125rem;
+	color: #1f2937;
+	margin-bottom: 0.75rem;
+	border-bottom: 2px solid #fed7aa;
+	padding-bottom: 0.5rem;
+}
+
+/* 標籤樣式 */
+.match-label {
+	position: absolute;
+	top: 0.75rem;
+	padding: 0.25rem 0.5rem;
+	border-radius: 9999px;
+	font-weight: 600;
+	font-size: 0.75rem;
+}
+
+.set-label {
+	right: 0.75rem;
+	background-color: #fed7aa;
+	color: #9a3412;
+}
+
+.match-number-label {
+	left: 0.75rem;
+	background-color: #bfdbfe;
+	color: #1e40af;
+}
+
+/* 主要內容容器 */
+.match-content {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+/* 隊伍容器 */
+.team-container {
+	flex: 1;
+	text-align: center;
+}
+
+/* 隊伍名稱 */
+.team-name {
+	font-size: 1.05rem;
+	font-weight: 600;
+	color: #374151;
+	margin-bottom: 0.5rem;
+	height: 4rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1.25;
+}
+
+/* 分數圓圈 */
+.score-circle {
+	width: 5.5rem;
+	height: 5.5rem;
+	border-radius: 50%;
+	color: #ffffff;
+	font-size: 2rem;
+	font-weight: 800;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
+	transform-style: preserve-3d;
+}
+
+.score-circle.team1 {
+	background-color: #3b82f6;
+}
+
+.score-circle.team2 {
+	background-color: #ef4444;
+}
+
+/* 中間比分區域 */
+.center-score {
+	font-size: 2rem;
+	font-weight: 700;
+	color: #f97316;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/* 各局比分標題 */
+.sets-title {
+	margin-top: 0.5rem;
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: #374151;
+}
+
+/* 各局比分容器 */
+.sets-container {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	font-size: 0.75rem;
+	color: #4b5563;
+	margin-top: 0.25rem;
+}
+
+/* 單局比分 */
+.set-score {
+	padding: 0.25rem 0.25rem;
+	border-radius: 0.375rem;
+	text-align: center;
+	width: 3rem;
+	font-weight: 600;
+	font-size: 0.75rem;
+}
+
+.set-score.team1-win {
+	background-color: #dbeafe;
+	color: #1d4ed8;
+}
+
+.set-score.team2-win {
+	background-color: #fecaca;
+	color: #dc2626;
+}
+
+.set-score.no-result {
+	background-color: #f3f4f6;
+	color: #6b7280;
+}
+
+/* 錯誤狀態樣式 */
+.error-state {
+	grid-column: 1 / -1;
+	text-align: center;
+	padding: 3rem;
+}
+
+.error-title {
+	color: #ef4444;
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+}
+
+.error-message {
+	color: #4b5563;
+}
+
+@media (max-width: 480px) {
+	/* 手機版即時更新橫幅調整 */
+	.live-update-banner {
+		padding: 0.625rem 1.25rem;
+		margin-bottom: 0.5rem;
+		max-width: 280px;
+	}
+	
+	.live-text {
+		font-size: 0.875rem;
+	}
+	
+	.live-indicator {
+		width: 10px;
+		height: 10px;
+	}
+
+	/* 手機版比賽卡片調整 */
+	.match-card {
+		padding: 1.5rem;
+	}
+
+	.field-title {
+		font-size: 1.25rem;
+		margin-bottom: 1rem;
+	}
+
+	.match-label {
+		top: 1rem;
+		font-size: 0.875rem;
+		padding: 0.375rem 0.75rem;
+	}
+
+	.set-label {
+		right: 1rem;
+	}
+
+	.match-number-label {
+		left: 1rem;
+	}
+
+	.match-content {
+		gap: 1.5rem;
+	}
+
+	.team-name {
+		font-size: 1rem;
+		height: 5rem;
+	}
+
+	.score-circle {
+		width: 5rem;
+		height: 5rem;
+		font-size: 1.875rem;
+	}
+
+	.center-score {
+		font-size: 1.875rem;
+	}
+
+	.sets-title {
+		margin-top: 1rem;
+		font-size: 0.875rem;
+	}
+
+	.sets-container {
+		margin-top: 0.5rem;
+		font-size: 0.875rem;
+	}
+
+	.set-score {
+		padding: 0.25rem 0.5rem;
+		width: 4rem;
+		font-size: 0.875rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	.team-name {
+		font-size: 1.125rem;
+	}
+
+	.score-circle {
+		width: 6rem;
+		height: 6rem;
+		font-size: 1.875rem;
+	}
+
+	.center-score {
+		font-size: 2.25rem;
+	}
+} 
