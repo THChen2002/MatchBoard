@@ -10,6 +10,8 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous">
     </script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/result.js"></script>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/results.css">
 </head>
@@ -45,7 +47,7 @@
         </div>
     </nav>
     
-    <main class="max-w-7xl mx-auto px-4 py-8">
+    <main id="resultsContainer" class="max-w-7xl mx-auto px-4 py-8">
         <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 max-w-5xl mx-auto mb-3">
             <div class="flex items-center mb-6">
                 <div class="bg-amber-100 rounded-full p-3 mr-4">
@@ -92,7 +94,7 @@
                     </div>
                     <div class="round-robin-group">
                         <h3>A 組</h3>
-                        <div class="round-robin-match">
+                        <div class="round-robin-match" data-match-no="一">
                             <div class="team-container">
                                 <span class="team-box">隊伍 A1</span>
                                 <span>vs</span>
@@ -105,7 +107,7 @@
                             </div>
                             <span class="status upcoming">未開始</span>
                         </div>
-                        <div class="round-robin-match">
+                        <div class="round-robin-match" data-match-no="七">
                             <div class="team-container">
                                 <span class="team-box">隊伍 A1</span>
                                 <span>vs</span>
@@ -118,7 +120,7 @@
                             </div>
                             <span class="status completed">已結束</span>
                         </div>
-                        <div class="round-robin-match">
+                        <div class="round-robin-match" data-match-no="十三">
                             <div class="team-container">
                                 <span class="team-box">隊伍 A2</span>
                                 <span>vs</span>
@@ -135,7 +137,7 @@
 
                     <div class="round-robin-group">
                         <h3>B 組</h3>
-                        <div class="round-robin-match">
+                        <div class="round-robin-match" data-match-no="二">
                             <div class="team-container">
                                 <span class="team-box">隊伍 B1</span>
                                 <span>vs</span>
@@ -148,7 +150,7 @@
                             </div>
                             <span class="status upcoming">未開始</span>
                         </div>
-                        <div class="round-robin-match">
+                        <div class="round-robin-match" data-match-no="八">
                             <div class="team-container">
                                 <span class="team-box">隊伍 B1</span>
                                 <span>vs</span>
@@ -161,11 +163,183 @@
                             </div>
                             <span class="status completed">已結束</span>
                         </div>
-                        <div class="round-robin-match">
+                        <div class="round-robin-match" data-match-no="十四">
                             <div class="team-container">
                                 <span class="team-box">隊伍 B2</span>
                                 <span>vs</span>
                                 <span class="team-box">隊伍 B3</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">0</span>
+                                <span>:</span>
+                                <span class="score-box">0</span>
+                            </div>
+                            <span class="status upcoming">未開始</span>
+                        </div>
+                    </div>
+
+                    <div class="round-robin-group">
+                        <h3>C 組</h3>
+                        <div class="round-robin-match" data-match-no="三">
+                            <div class="team-container">
+                                <span class="team-box">隊伍 C1</span>
+                                <span>vs</span>
+                                <span class="team-box">隊伍 C2</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">0</span>
+                                <span>:</span>
+                                <span class="score-box">0</span>
+                            </div>
+                            <span class="status upcoming">未開始</span>
+                        </div>
+                        <div class="round-robin-match" data-match-no="九">
+                            <div class="team-container">
+                                <span class="team-box">隊伍 C1</span>
+                                <span>vs</span>
+                                <span class="team-box">隊伍 C3</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">8</span>
+                                <span>:</span>
+                                <span class="score-box">7</span>
+                            </div>
+                            <span class="status completed">已結束</span>
+                        </div>
+                        <div class="round-robin-match" data-match-no="十五">
+                            <div class="team-container">
+                                <span class="team-box">隊伍 C2</span>
+                                <span>vs</span>
+                                <span class="team-box">隊伍 C3</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">0</span>
+                                <span>:</span>
+                                <span class="score-box">0</span>
+                            </div>
+                            <span class="status upcoming">未開始</span>
+                        </div>
+                    </div>
+
+                    <div class="round-robin-group">
+                        <h3>D 組</h3>
+                        <div class="round-robin-match" data-match-no="四">
+                            <div class="team-container">
+                                <span class="team-box">隊伍 D1</span>
+                                <span>vs</span>
+                                <span class="team-box">隊伍 D2</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">0</span>
+                                <span>:</span>
+                                <span class="score-box">0</span>
+                            </div>
+                            <span class="status upcoming">未開始</span>
+                        </div>
+                        <div class="round-robin-match" data-match-no="十">
+                            <div class="team-container">
+                                <span class="team-box">隊伍 D1</span>
+                                <span>vs</span>
+                                <span class="team-box">隊伍 D3</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">8</span>
+                                <span>:</span>
+                                <span class="score-box">7</span>
+                            </div>
+                            <span class="status completed">已結束</span>
+                        </div>
+                        <div class="round-robin-match" data-match-no="十六">
+                            <div class="team-container">
+                                <span class="team-box">隊伍 D2</span>
+                                <span>vs</span>
+                                <span class="team-box">隊伍 D3</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">0</span>
+                                <span>:</span>
+                                <span class="score-box">0</span>
+                            </div>
+                            <span class="status upcoming">未開始</span>
+                        </div>
+                    </div>
+
+                    <div class="round-robin-group">
+                        <h3>E 組</h3>
+                        <div class="round-robin-match" data-match-no="五">
+                            <div class="team-container">
+                                <span class="team-box">隊伍 E1</span>
+                                <span>vs</span>
+                                <span class="team-box">隊伍 E2</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">0</span>
+                                <span>:</span>
+                                <span class="score-box">0</span>
+                            </div>
+                            <span class="status upcoming">未開始</span>
+                        </div>
+                        <div class="round-robin-match" data-match-no="十一">
+                            <div class="team-container">
+                                <span class="team-box">隊伍 E1</span>
+                                <span>vs</span>
+                                <span class="team-box">隊伍 E3</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">8</span>
+                                <span>:</span>
+                                <span class="score-box">7</span>
+                            </div>
+                            <span class="status completed">已結束</span>
+                        </div>
+                        <div class="round-robin-match" data-match-no="十七">
+                            <div class="team-container">
+                                <span class="team-box">隊伍 E2</span>
+                                <span>vs</span>
+                                <span class="team-box">隊伍 E3</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">0</span>
+                                <span>:</span>
+                                <span class="score-box">0</span>
+                            </div>
+                            <span class="status upcoming">未開始</span>
+                        </div>
+                    </div>
+
+                    <div class="round-robin-group">
+                        <h3>F 組</h3>
+                        <div class="round-robin-match" data-match-no="六">
+                            <div class="team-container">
+                                <span class="team-box">隊伍 F1</span>
+                                <span>vs</span>
+                                <span class="team-box">隊伍 F2</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">0</span>
+                                <span>:</span>
+                                <span class="score-box">0</span>
+                            </div>
+                            <span class="status upcoming">未開始</span>
+                        </div>
+                        <div class="round-robin-match" data-match-no="十二">
+                            <div class="team-container">
+                                <span class="team-box">隊伍 F1</span>
+                                <span>vs</span>
+                                <span class="team-box">隊伍 F3</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">8</span>
+                                <span>:</span>
+                                <span class="score-box">7</span>
+                            </div>
+                            <span class="status completed">已結束</span>
+                        </div>
+                        <div class="round-robin-match" data-match-no="十八">
+                            <div class="team-container">
+                                <span class="team-box">隊伍 F2</span>
+                                <span>vs</span>
+                                <span class="team-box">隊伍 F3</span>
                             </div>
                             <div class="score-container">
                                 <span class="score-box">0</span>
@@ -197,12 +371,12 @@
                         <div class="round-robin-team-card">隊伍 D3</div>
                     </div>
                     <div class="round-robin-group">
-                        <h3>A 組</h3>
-                        <div class="round-robin-match">
+                        <h3>十二強賽</h3>
+                        <div class="round-robin-match" data-match-no="十九">
                             <div class="team-container">
-                                <span class="team-box">隊伍 A1</span>
+                                <span class="team-box">隊伍 1</span>
                                 <span>vs</span>
-                                <span class="team-box">隊伍 A2</span>
+                                <span class="team-box">隊伍 2</span>
                             </div>
                             <div class="score-container">
                                 <span class="score-box">0</span>
@@ -211,11 +385,11 @@
                             </div>
                             <span class="status upcoming">未開始</span>
                         </div>
-                        <div class="round-robin-match">
+                        <div class="round-robin-match" data-match-no="廿">
                             <div class="team-container">
-                                <span class="team-box">隊伍 A1</span>
+                                <span class="team-box">隊伍 3</span>
                                 <span>vs</span>
-                                <span class="team-box">隊伍 A3</span>
+                                <span class="team-box">隊伍 4</span>
                             </div>
                             <div class="score-container">
                                 <span class="score-box">10</span>
@@ -224,11 +398,24 @@
                             </div>
                             <span class="status completed">已結束</span>
                         </div>
-                        <div class="round-robin-match">
+                        <div class="round-robin-match" data-match-no="廿一">
                             <div class="team-container">
-                                <span class="team-box">隊伍 A2</span>
+                                <span class="team-box">隊伍 5</span>
                                 <span>vs</span>
-                                <span class="team-box">隊伍 A3</span>
+                                <span class="team-box">隊伍 6</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">0</span>
+                                <span>:</span>
+                                <span class="score-box">0</span>
+                            </div>
+                            <span class="status upcoming">未開始</span>
+                        </div>
+                        <div class="round-robin-match" data-match-no="廿二">
+                            <div class="team-container">
+                                <span class="team-box">隊伍 7</span>
+                                <span>vs</span>
+                                <span class="team-box">隊伍 8</span>
                             </div>
                             <div class="score-container">
                                 <span class="score-box">0</span>
@@ -240,12 +427,12 @@
                     </div>
 
                     <div class="round-robin-group">
-                        <h3>B 組</h3>
-                        <div class="round-robin-match">
+                        <h3>八強賽</h3>
+                        <div class="round-robin-match" data-match-no="廿三">
                             <div class="team-container">
-                                <span class="team-box">隊伍 B1</span>
+                                <span class="team-box">種子 A</span>
                                 <span>vs</span>
-                                <span class="team-box">隊伍 B2</span>
+                                <span class="team-box">十二強賽勝A者</span>
                             </div>
                             <div class="score-container">
                                 <span class="score-box">0</span>
@@ -254,11 +441,11 @@
                             </div>
                             <span class="status upcoming">未開始</span>
                         </div>
-                        <div class="round-robin-match">
+                        <div class="round-robin-match" data-match-no="廿四">
                             <div class="team-container">
-                                <span class="team-box">隊伍 B1</span>
+                                <span class="team-box">十二強賽勝B者</span>
                                 <span>vs</span>
-                                <span class="team-box">隊伍 B3</span>
+                                <span class="team-box">種子 B</span>
                             </div>
                             <div class="score-container">
                                 <span class="score-box">8</span>
@@ -267,11 +454,88 @@
                             </div>
                             <span class="status completed">已結束</span>
                         </div>
-                        <div class="round-robin-match">
+                        <div class="round-robin-match" data-match-no="廿五">
                             <div class="team-container">
-                                <span class="team-box">隊伍 B2</span>
+                                <span class="team-box">種子 C</span>
                                 <span>vs</span>
-                                <span class="team-box">隊伍 B3</span>
+                                <span class="team-box">十二強賽勝C者</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">8</span>
+                                <span>:</span>
+                                <span class="score-box">7</span>
+                            </div>
+                            <span class="status completed">已結束</span>
+                        </div>
+                        <div class="round-robin-match" data-match-no="廿六">
+                            <div class="team-container">
+                                <span class="team-box">十二強賽勝D者</span>
+                                <span>vs</span>
+                                <span class="team-box">種子 D</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">0</span>
+                                <span>:</span>
+                                <span class="score-box">0</span>
+                            </div>
+                            <span class="status upcoming">未開始</span>
+                        </div>
+                    </div>
+
+                    <div class="round-robin-group">
+                        <h3>四強賽</h3>
+                        <div class="round-robin-match" data-match-no="廿七">
+                            <div class="team-container">
+                                <span class="team-box">八強賽勝A者</span>
+                                <span>vs</span>
+                                <span class="team-box">八強賽勝B者</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">0</span>
+                                <span>:</span>
+                                <span class="score-box">0</span>
+                            </div>
+                            <span class="status upcoming">未開始</span>
+                        </div>
+                        <div class="round-robin-match" data-match-no="廿八">
+                            <div class="team-container">
+                                <span class="team-box">八強賽勝C者</span>
+                                <span>vs</span>
+                                <span class="team-box">八強賽勝D者</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">0</span>
+                                <span>:</span>
+                                <span class="score-box">0</span>
+                            </div>
+                            <span class="status upcoming">未開始</span>
+                        </div>
+                    </div>
+
+                    <div class="round-robin-group">
+                        <h3>季軍賽</h3>
+                        <div class="round-robin-match" data-match-no="廿九">
+                            <div class="team-container">
+                                <span class="team-box">四強賽勝A者</span>
+                                <span>vs</span>
+                                <span class="team-box">四強賽勝B者</span>
+                            </div>
+                            <div class="score-container">
+                                <span class="score-box">0</span>
+                                <span>:</span>
+                                <span class="score-box">0</span>
+                            </div>
+                            <span class="status upcoming">未開始</span>
+                        </div>
+                    </div>
+
+                    <div class="round-robin-group">
+                        <h3>冠軍賽</h3>
+                        <div class="round-robin-match" data-match-no="三十">
+                            <div class="team-container">
+                                <span class="team-box">四強賽敗A者</span>
+                                <span>vs</span>
+                                <span class="team-box">四強賽敗B者</span>
                             </div>
                             <div class="score-container">
                                 <span class="score-box">0</span>
@@ -285,7 +549,17 @@
             </div>
         </div>
     </main>
-
+    <!-- Loading Animation -->
+    <div id="loading-container" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" style="display: none;">
+        <div class="bg-white rounded-2xl p-8 shadow-2xl flex flex-col items-center">
+            <div class="relative">
+                <div class="w-16 h-16 border-4 border-orange-200 rounded-full animate-spin"></div>
+                <div class="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin absolute top-0 left-0"></div>
+            </div>
+            <div class="mt-4 text-xl font-semibold text-gray-700">載入對戰成績中...</div>
+            <div class="mt-2 text-sm text-gray-500">請稍候</div>
+        </div>
+    </div>
 
 </body>
 
