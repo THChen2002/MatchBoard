@@ -1,18 +1,18 @@
 /* 錦標賽容器 */
 .tournament-container {
     text-align: center;
-    padding: 20px;
+    padding: 10px;
 }
 
 /* 循環賽區塊樣式 */
 .round-robin-section {
     width: 100%;
-    max-width: 900px;
-    margin: 0 auto 40px auto;
+    max-width: 1200px;
+    margin: 0 auto 20px auto;
     background-color: transparent;
     border: 2px solid #fb923c;
     border-radius: 12px;
-    padding: 20px;
+    padding: 15px;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     text-align: left;
 }
@@ -25,17 +25,103 @@
     text-align: center;
 }
 
+/* 組別容器 - 預設手機版單列 */
+.round-robin-groups-container {
+    display: block;
+}
+
+/* 單場比賽組別 */
+.single-match-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 單場比賽組別水平佈局 - 預設手機版垂直 */
+.single-match-group .round-robin-match-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.single-match-group .round-robin-match {
+    flex: 1;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 16px !important;
+    gap: 12px !important;
+    justify-content: center !important;
+    width: 100%;
+}
+
+.single-match-group .round-robin-match .team-score-wrapper {
+    flex: none !important;
+    max-width: none !important;
+}
+
+/* 四強賽特殊佈局 - 預設手機版垂直 */
+.semifinals-group .round-robin-match-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.semifinals-group .round-robin-match {
+    flex: 1;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 16px !important;
+    gap: 12px !important;
+    justify-content: center !important;
+    width: 100%;
+}
+
+.semifinals-group .round-robin-match .team-score-wrapper {
+    flex: none !important;
+    max-width: none !important;
+}
+
 /* 循環賽組別樣式 */
 .round-robin-group {
     background: linear-gradient(135deg, #ffffff 0%, #fef7ec 100%);
     border: 2px solid #fb923c;
     border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 32px;
+    padding: 20px;
+    margin-bottom: 24px;
     box-shadow: 0 8px 25px rgba(251, 146, 60, 0.15);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+}
+
+/* 循環賽比賽容器 - 預設手機版垂直，大螢幕水平 */
+.round-robin-group .round-robin-match-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.round-robin-group .round-robin-match {
+    flex: 1;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 16px !important;
+    gap: 12px !important;
+    justify-content: center !important;
+    width: 100%;
+}
+
+.round-robin-group .round-robin-match .team-score-wrapper {
+    flex: none !important;
+    max-width: none !important;
 }
 
 .round-robin-group::before {
@@ -54,10 +140,10 @@
 }
 
 .round-robin-group h3 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: #7c2d12;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     border-bottom: none;
     padding-bottom: 0;
     text-align: center;
@@ -78,19 +164,19 @@
     border-radius: 2px;
 }
 
-/* 比賽項目樣式 */
+/* 比賽項目樣式 - 垂直佈局 */
 .round-robin-match {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 12px;
     align-items: center;
-    padding: 20px 24px;
+    padding: 16px;
     border-bottom: 1px solid #fed7aa;
     background: linear-gradient(135deg, #fff 0%, #fef7ec 100%);
     border-radius: 8px;
     margin-bottom: 12px;
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(251, 146, 60, 0.1);
-    gap: 32px;
 }
 
 .round-robin-match:hover {
@@ -103,27 +189,59 @@
     margin-bottom: 0;
 }
 
-/* 隊伍容器和隊伍框 */
+/* 包裝器 - 垂直排列 */
+.team-score-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+
+/* 隊伍容器和隊伍框 - 預設手機版 */
 .team-container {
     display: flex;
     gap: 12px;
-    flex: 2;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
+    min-height: 40px;
+    width: 100%;
+}
+
+.team-container>span:not(.team-box) {
+    font-weight: 700;
+    color: #7c2d12;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    flex-shrink: 0;
 }
 
 .team-box {
     background: linear-gradient(135deg, #fef7ec 0%, #fed7aa 100%);
     border: 2px solid #f97316;
     border-radius: 8px;
-    padding: 12px 16px;
+    padding: 10px 12px;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: #7c2d12;
     text-align: center;
-    min-width: 100px;
+    width: 60px;
+    min-width: 60px;
+    max-width: 60px;
     box-shadow: 0 2px 6px rgba(249, 115, 22, 0.15);
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.2;
+    flex-shrink: 0;
 }
 
 .team-box:hover {
@@ -132,18 +250,17 @@
     border-color: #ea580c;
 }
 
-/* 比分容器和比分框 */
+/* 比分容器和比分框 - 預設手機版 */
 .score-container {
     display: flex;
-    gap: 12px;
-    flex: 1;
+    gap: 8px;
     justify-content: center;
     align-items: center;
 }
 
 .score-box {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     background: linear-gradient(135deg, #ffffff 0%, #fef3e2 100%);
     border: 2px solid #fb923c;
     border-radius: 8px;
@@ -151,7 +268,7 @@
     align-items: center;
     justify-content: center;
     font-weight: 800;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: #ea580c;
     box-shadow: 0 2px 8px rgba(251, 146, 60, 0.15);
     transition: all 0.3s ease;
@@ -162,38 +279,88 @@
     box-shadow: 0 4px 12px rgba(251, 146, 60, 0.25);
 }
 
-/* 比賽狀態樣式 */
-.round-robin-match .status {
-    font-size: 0.9rem;
+/* 總比分隊伍顏色 */
+.score-box.team-left {
+    background: #dbeafe;
+    border: 2px solid #3b82f6;
+    color: #1d4ed8;
+    box-shadow: 0 2px 8px rgba(219, 234, 254, 0.5);
+}
+
+.score-box.team-right {
+    background: #fecaca;
+    border: 2px solid #ef4444;
+    color: #dc2626;
+    box-shadow: 0 2px 8px rgba(254, 202, 202, 0.5);
+}
+
+/* 比賽狀態容器 - 預設手機版 */
+.status-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+}
+
+/* 比賽信息按鈕（場次+時間） - 修改為對齊vs文字 */
+.match-info {
+    font-size: 0.85rem;
     font-weight: 600;
-    padding: 10px 18px;
-    border-radius: 20px;
-    border: none;
-    flex: 0 0 auto;
+    padding: 12px 60px 12px 16px;
+    border-radius: 8px;
+    border: 2px solid #fb923c;
+    background: linear-gradient(135deg, #ffffff 0%, #fef3e2 100%);
+    color: #7c2d12;
     text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    min-width: 90px;
+    box-shadow: 0 2px 4px rgba(251, 146, 60, 0.15);
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.2;
+    margin-bottom: 0;
+    min-height: 44px;
+    position: relative;
 }
 
-.round-robin-match .status.completed {
-    color: #ffffff;
-    background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+.match-info .match-number {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
 }
 
-.round-robin-match .status.upcoming {
-    color: #ffffff;
-    background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+.match-info .match-time {
+    font-size: 0.8rem;
+    font-weight: 600;
+    opacity: 0.9;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 100%;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-/* 循環賽隊伍列表 */
+/* 循環賽隊伍列表 - 預設手機版 */
 .round-robin-teams-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
     margin: 30px 0 40px 0;
-    padding: 20px;
+    padding: 15px;
     background: linear-gradient(135deg, #fef7ec 0%, #fff 100%);
     border-radius: 16px;
     border: 1px solid #fed7aa;
@@ -203,7 +370,7 @@
     background: linear-gradient(135deg, #ffffff 0%, #fef3e2 100%);
     border: 2px solid #fb923c;
     border-radius: 12px;
-    padding: 16px 20px;
+    padding: 12px 16px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(251, 146, 60, 0.1);
     font-weight: 700;
@@ -211,6 +378,14 @@
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 45px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.2;
 }
 
 .round-robin-team-card::before {
@@ -234,72 +409,536 @@
     left: 100%;
 }
 
+/* 決賽組別 - 預設手機版垂直佈局 */
+.final-match-group {
+    width: 100% !important;
+    display: block !important;
+    margin: 0 0 24px 0 !important;
+}
 
+/* 隊伍顏色標示 */
+.team-box.team-left {
+    background: #dbeafe;
+    color: #1d4ed8;
+    border: 2px solid #3b82f6;
+    box-shadow: 0 2px 8px rgba(219, 234, 254, 0.5);
+}
+
+.team-box.team-right {
+    background: #fecaca;
+    color: #dc2626;
+    border: 2px solid #ef4444;
+    box-shadow: 0 2px 8px rgba(254, 202, 202, 0.5);
+}
+
+/* 局分顯示區塊 */
+.set-scores {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.set-score {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    min-width: 50px;
+    text-align: center;
+}
+
+.set-score.left-win {
+    background: #dbeafe;
+    color: #1d4ed8;
+    border: 1px solid #3b82f6;
+    box-shadow: 0 2px 4px rgba(219, 234, 254, 0.5);
+}
+
+.set-score.right-win {
+    background: #fecaca;
+    color: #dc2626;
+    border: 1px solid #ef4444;
+    box-shadow: 0 2px 4px rgba(254, 202, 202, 0.5);
+}
+
+.set-score.unplayed {
+    background: #e5e7eb;
+    color: #9ca3af;
+    border: 1px solid #d1d5db;
+}
+
+/* 響應式調整 */
 @media (max-width: 768px) {
-    .tournament-container {
-        padding: 10px;
+    .set-scores {
+        gap: 6px;
+        margin-top: 6px;
     }
-    
-    .round-robin-section {
-        padding: 15px;
-        margin-bottom: 20px;
+
+    .set-score {
+        padding: 3px 6px;
+        font-size: 0.7rem;
+        min-width: 45px;
     }
-    
+}
+
+@media (max-width: 480px) {
+    .set-scores {
+        gap: 4px;
+        margin-top: 6px;
+    }
+
+    .set-score {
+        padding: 2px 5px;
+        font-size: 0.65rem;
+        min-width: 40px;
+    }
+}
+
+/* ==========================================================================
+   響應式設計 (RWD) - Mobile First with min-width
+   ========================================================================== */
+
+/* 超小手機 (480px+) */
+@media (min-width: 480px) {
     .round-robin-teams-list {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 15px;
-        padding: 15px;
-    }
-    
-    .round-robin-team-card {
-        padding: 12px 16px;
-        font-size: 0.9rem;
-    }
-    
-    .round-robin-group {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 20px;
         padding: 20px;
-        margin-bottom: 24px;
     }
-    
-    .round-robin-match {
-        padding: 16px;
-        flex-direction: column;
-        gap: 16px;
-        align-items: stretch;
+
+    .round-robin-team-card {
+        padding: 16px 20px;
+        font-size: 1rem;
+        min-height: 50px;
     }
-    
-    .team-container {
-        flex: none;
-        justify-content: center;
-        gap: 8px;
+
+    .team-container>span:not(.team-box) {
+        min-height: 44px;
+        font-size: 1rem;
     }
-    
+
     .team-box {
-        min-width: 80px;
-        padding: 10px 12px;
+        min-height: 44px;
+        width: 90px;
+        min-width: 90px;
+        max-width: 90px;
+    }
+}
+
+/* 手機橫向 (600px+) */
+@media (min-width: 600px) {
+    .score-container {
+        gap: 12px;
+    }
+
+    .score-box {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
+    }
+
+    .team-container {
+        min-height: 60px;
+    }
+
+    .round-robin-match {
+        padding: 20px 24px;
+    }
+
+    .match-info {
+        font-size: 0.9rem;
+        padding: 14px 20px;
+        min-height: 48px;
+    }
+
+    .match-info .match-number,
+    .match-info .match-time {
         font-size: 0.85rem;
     }
-    
-    .score-container {
-        flex: none;
-        justify-content: center;
+}
+
+/* 平板直向 (769px+) */
+@media (min-width: 769px) {
+    .tournament-container {
+        padding: 20px;
     }
-    
+
+    .round-robin-section {
+        margin-bottom: 40px;
+        padding: 20px;
+    }
+
+    /* 單場比賽跨越兩列 */
+    .single-match-group {
+        grid-column: 1 / -1;
+    }
+
+    /* 四強賽改為水平並排 */
+    .semifinals-group .round-robin-match-container {
+        flex-direction: row;
+        gap: 24px;
+    }
+
+    .semifinals-group .round-robin-match {
+        margin-bottom: 0;
+        padding: 20px 24px !important;
+        width: auto;
+    }
+
+    /* 決賽組別水平排列 */
+    .final-match-group {
+        grid-column: auto !important;
+        width: 48% !important;
+        display: inline-block !important;
+        vertical-align: top !important;
+        margin: 0 1% !important;
+        text-align: left !important;
+    }
+
+    .final-match-group .round-robin-match {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        align-items: center !important;
+        padding: 20px 24px !important;
+    }
+
+    .final-match-group .team-score-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 16px !important;
+        width: 100% !important;
+    }
+
+    .team-box {
+        width: 100px;
+        min-width: 100px;
+        max-width: 100px;
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
+
+    .match-info {
+        font-size: 0.8rem;
+        padding: 12px 16px;
+        width: 100%;
+        min-height: 40px;
+    }
+
+    .match-info .match-number {
+        font-size: 0.75rem;
+    }
+
+    .match-info .match-time {
+        font-size: 0.75rem;
+    }
+
+    /* 循環賽組別樣式 */
+    .round-robin-group {
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .round-robin-group h3 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    /* 循環賽組別內比賽改為兩個一列 */
+    .round-robin-group .round-robin-match-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    .round-robin-group .round-robin-match {
+        margin-bottom: 0;
+        padding: 20px 24px !important;
+        width: auto;
+        grid-column: span 1;
+    }
+
+    .round-robin-group .round-robin-match:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        max-width: 50%;
+        margin: 0 auto;
+    }
+
+    /* 單場比賽組別改為水平並排 */
+    .single-match-group .round-robin-match-container {
+        flex-direction: row;
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+
+    .single-match-group .round-robin-match {
+        margin-bottom: 0;
+        padding: 20px 24px !important;
+        width: auto;
+        min-width: 300px;
+        flex: 1;
+    }
+}
+
+/* 平板橫向/小筆電 (900px+) */
+@media (min-width: 900px) {
+    .round-robin-groups-container {
+        gap: 24px;
+    }
+
+    .team-box {
+        width: 130px;
+        min-width: 130px;
+        max-width: 130px;
+        font-size: 0.9rem;
+        padding: 10px 14px;
+    }
+
+    .team-container>span:not(.team-box) {
+        font-size: 0.95rem;
+    }
+
+    .round-robin-match {
+        padding: 18px 20px;
+    }
+
     .score-box {
         width: 45px;
         height: 45px;
         font-size: 1.2rem;
     }
-    
-    .round-robin-match .status {
-        align-self: center;
-        margin: 0;
-        flex: 0 0 auto;
-        min-width: 70px;
+}
+
+/* 中等螢幕 (1024px+) */
+@media (min-width: 1024px) {
+    .round-robin-groups-container {
+        gap: 28px;
     }
 
-    .round-robin-group h3 {
-        font-size: 1.3rem;
-        margin-bottom: 16px;
+    .team-box {
+        width: 120px;
+        min-width: 120px;
+        max-width: 120px;
+        font-size: 0.95rem;
+        padding: 12px 16px;
     }
-} 
+
+    .team-container>span:not(.team-box) {
+        font-size: 1rem;
+    }
+
+    .score-box {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
+    }
+
+    .match-info {
+        font-size: 0.9rem;
+        padding: 14px 20px;
+        width: 100%;
+        min-height: 48px;
+    }
+
+    .match-info .match-number {
+        font-size: 0.85rem;
+        text-align: center;
+    }
+
+    .match-info .match-time {
+        font-size: 0.85rem;
+    }
+}
+
+/* 大螢幕 (1200px+) */
+@media (min-width: 1200px) {
+    .round-robin-groups-container {
+        gap: 32px;
+    }
+}
+/* 手機橫向 (max-width: 599px) */
+@media (max-width: 599px) {
+    .round-robin-teams-list {
+        grid-template-columns: repeat(2, 1fr);
+        /* 固定2列顯示 */
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .score-container {
+        gap: 8px;
+    }
+
+    .score-box {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+
+    .team-container {
+        min-height: 40px;
+    }
+
+    .round-robin-match {
+        padding: 16px;
+    }
+}
+
+/* 手機直向 (max-width: 479px) */
+@media (max-width: 479px) {
+    .round-robin-teams-list {
+        grid-template-columns: repeat(2, 1fr);
+        /* 固定2列顯示 */
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .round-robin-team-card {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+        min-height: 45px;
+    }
+
+    .team-score-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        width: 100% !important;
+        align-items: center !important;
+    }
+
+    .status-container {
+        grid-column: unset !important;
+        grid-row: unset !important;
+        width: 100% !important;
+        margin-bottom: 8px !important;
+    }
+
+    .team-container {
+        grid-column: unset !important;
+        grid-row: unset !important;
+        min-height: 40px;
+    }
+
+    .set-scores {
+        grid-column: unset !important;
+        grid-row: unset !important;
+        margin-top: 0 !important;
+    }
+
+    .score-container {
+        grid-column: unset !important;
+        grid-row: unset !important;
+        min-width: 100px !important;
+    }
+
+    .team-container>span:not(.team-box) {
+        min-height: 35px;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+    }
+
+    .team-box {
+        width: 60px;
+        min-width: 60px;
+        max-width: 60px;
+        min-height: 35px;
+        line-height: 1.15;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+    }
+
+    .match-info {
+        font-size: 0.7rem;
+        padding: 0px 10px !important;
+        min-width: 55px;
+        min-height: 36px;
+        width: 100% !important;
+        justify-content: space-between !important;
+    }
+
+    .match-info .match-number {
+        font-size: 0.65rem;
+        text-align: left !important;
+        position: static !important;
+        width: auto !important;
+        left: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        display: block !important;
+    }
+
+    .match-info .match-time {
+        font-size: 0.7rem;
+        right: auto !important;
+        position: static !important;
+        top: auto !important;
+        transform: none !important;
+        text-align: right !important;
+        display: block !important;
+        margin-left: auto !important;
+        flex-shrink: 0 !important;
+    }
+}
+
+/* 平板以下螢幕 (max-width: 768px and min-width: 480px) - 統一回復到垂直佈局 */
+@media (max-width: 768px) and (min-width: 480px) {
+    .team-score-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
+        align-items: center !important;
+    }
+    
+    .status-container {
+        grid-column: unset !important;
+        grid-row: unset !important;
+        width: 100% !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .team-container {
+        grid-column: unset !important;
+        grid-row: unset !important;
+        width: 100% !important;
+    }
+    
+    .set-scores {
+        grid-column: unset !important;
+        grid-row: unset !important;
+        margin-top: 8px !important;
+        gap: 6px;
+    }
+    
+    .score-container {
+        grid-column: unset !important;
+        grid-row: unset !important;
+        width: 100% !important;
+        min-width: unset !important;
+    }
+    
+    .match-info {
+        width: 100% !important;
+        padding: 12px 60px 12px 16px !important;
+    }
+    
+    .match-info .match-time {
+        right: 16px !important;
+    }
+    
+    .set-score {
+        padding: 3px 6px;
+        font-size: 0.7rem;
+        min-width: 45px;
+    }
+}
