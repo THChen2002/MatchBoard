@@ -54,42 +54,30 @@
 	<main class="max-w-7xl mx-auto px-4 py-8">
 		<div class="text-center my-10">
 			<!-- 跑馬燈模組 -->
-			<div class="bg-orange-100 border-l-4 border-orange-500 rounded-lg p-3 sm:p-4 mb-6 relative">
-				<div class="flex items-start gap-2 sm:gap-3">
-					<!-- 警告圖標 -->
+			<div class="bg-orange-100 rounded-2xl shadow-lg p-6 mb-6">
+				<div class="flex items-center gap-2 sm:gap-3">
+					<!-- 重要公告標題 -->
+					<div class="flex-shrink-0 bg-orange-500 px-3 py-1 rounded-lg">
+						<span class="text-lg sm:text-xl font-bold text-white">重要公告</span>
+					</div>
+					<!-- 喇叭圖標 -->
 					<div class="flex-shrink-0">
-						<div class="w-6 h-6 sm:w-7 sm:h-7 bg-orange-500 rounded-full flex items-center justify-center">
-							<svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd"
-									d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-									clip-rule="evenodd" />
-							</svg>
-						</div>
+						<svg width="25px" height="25px" viewBox="0 0 32 32" id="OBJECT"
+							xmlns="http://www.w3.org/2000/svg">
+							<path fill="#F59e0b"
+								d="M9.26,17.35A1,1,0,0,0,8.5,17h-5a1,1,0,0,0-1,1V30a1,1,0,0,0,1,1H4.81a3,3,0,0,0,3-2.51L9.49,18.16A1,1,0,0,0,9.26,17.35Z" />
+							<path fill="#F59e0b"
+								d="M22.58,3.19a1,1,0,0,0-.9-.14L9.84,7H4a3,3,0,0,0-3,3v8a1,1,0,0,0,1,1H9.84L21.68,23A1.19,1.19,0,0,0,22,23a.94.94,0,0,0,.58-.19A1,1,0,0,0,23,22V4A1,1,0,0,0,22.58,3.19Z" />
+							<path d="M9.84,19V7H4a3,3,0,0,0-3,3v8a1,1,0,0,0,1,1Z" />
+							<path fill="#F59e0b"
+								d="M27.76,7.76l-1.31-.65A1,1,0,0,0,25,8V18a1,1,0,0,0,.47.85A1,1,0,0,0,26,19a1,1,0,0,0,.45-.11l1.31-.65a5.86,5.86,0,0,0,0-10.48Z" />
+							<path d="M24,1H22a1,1,0,0,0-1,1V24a1,1,0,0,0,1,1h2a3,3,0,0,0,3-3V4A3,3,0,0,0,24,1Z" />
+						</svg>
 					</div>
 					<!-- 跑馬燈內容 -->
-					<div class="flex-1 min-w-0">
-						<div class="mb-2 text-left">
-							<span class="text-lg sm:text-xl font-bold text-orange-800">重要公告</span>
-						</div>
-						<div class="flex items-center gap-2">
-							<div class="flex-shrink-0">
-								<svg width="25px" height="25px" viewBox="0 0 32 32" id="OBJECT"
-									xmlns="http://www.w3.org/2000/svg">
-									<path fill="#F59e0b"
-										d="M9.26,17.35A1,1,0,0,0,8.5,17h-5a1,1,0,0,0-1,1V30a1,1,0,0,0,1,1H4.81a3,3,0,0,0,3-2.51L9.49,18.16A1,1,0,0,0,9.26,17.35Z" />
-									<path fill="#F59e0b"
-										d="M22.58,3.19a1,1,0,0,0-.9-.14L9.84,7H4a3,3,0,0,0-3,3v8a1,1,0,0,0,1,1H9.84L21.68,23A1.19,1.19,0,0,0,22,23a.94.94,0,0,0,.58-.19A1,1,0,0,0,23,22V4A1,1,0,0,0,22.58,3.19Z" />
-									<path d="M9.84,19V7H4a3,3,0,0,0-3,3v8a1,1,0,0,0,1,1Z" />
-									<path fill="#F59e0b"
-										d="M27.76,7.76l-1.31-.65A1,1,0,0,0,25,8V18a1,1,0,0,0,.47.85A1,1,0,0,0,26,19a1,1,0,0,0,.45-.11l1.31-.65a5.86,5.86,0,0,0,0-10.48Z" />
-									<path d="M24,1H22a1,1,0,0,0-1,1V24a1,1,0,0,0,1,1h2a3,3,0,0,0,3-3V4A3,3,0,0,0,24,1Z" />
-								</svg>
-							</div>
-							<div class="marquee-container flex-1">
-								<div class="marquee-text text-orange-900 text-sm sm:text-lg font-medium">
-									<!-- 跑馬燈文字將由JavaScript動態設置 -->
-								</div>
-							</div>
+					<div class="marquee-container flex-1 min-w-0 bg-gray-100 border border-orange-200 rounded-lg px-3 py-2">
+						<div class="marquee-text text-amber-800 text-sm sm:text-lg font-medium">
+							<!-- 跑馬燈文字將由JavaScript動態設置 -->
 						</div>
 					</div>
 				</div>
