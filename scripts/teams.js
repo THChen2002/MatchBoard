@@ -1,15 +1,15 @@
 // 獲取隊伍資料
 function fetchTeamsData() {
-    fetchData('teams', function(response) {
+    fetchAndStoreData('teams', function(response) {
         // console.log('獲取隊伍資料成功:', response);
-        $('#loading-container').hide();
+        $('#loadingContainer').hide();
         const teams = response.teams.map(team => ({
             ...team,
             captain: team.members[0].name // 隊長是 members 的第一個
         }));
         renderTeams(teams);
     }, function(xhr, status, error) {
-        $('#loading-container').hide();
+        $('#loadingContainer').hide();
         console.error('獲取隊伍資料失敗:', error);
         showEmptyState();
     });
@@ -90,7 +90,7 @@ function showTeamsContainer() {
 
 
 $(document).ready(function() {
-    $('#loading-container').show();
+    $('#loadingContainer').show();
     fetchTeamsData();
 });
 

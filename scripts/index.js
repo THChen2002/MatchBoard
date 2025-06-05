@@ -26,10 +26,9 @@ function updateMarqueeDisplay() {
 	}
 }
 
-// 從後端獲取跑馬燈數據
-function fetchMarqueeData() {
-	fetchData('marquee', function(data) {
-		// console.log('獲取跑馬燈資料成功:', data);
+// Use fetchAndStoreData for marquee data
+function getMarqueeData() {
+	fetchAndStoreData('marquee', function(data) {
 		setMarqueeText(data.text);
 		setMarqueeVisible(true);
 	}, function(xhr, status, error) {
@@ -60,11 +59,10 @@ const announcementTypeMap = {
 	}
 };
 
-// 從後端獲取公告數據
-function fetchAnnouncements() {
-	fetchData('announcements', function(data) {
-		// console.log('獲取公告資料成功:', data);
-		announcements = data.announcements.map(item => {
+// Use fetchAndStoreData for announcements
+function getAnnouncements() {
+	fetchAndStoreData('announcements', function(data) {
+		announcements = data.map(item => {
 			const typeConfig = announcementTypeMap[item.type] || announcementTypeMap["一般"];
 			return {
 				...item,
@@ -112,8 +110,8 @@ function renderAllAnnouncements() {
 // 使用 jQuery 的文檔就緒事件
 $(document).ready(function() {
 	// 初始化跑馬燈
-	fetchMarqueeData();
-	
-	// 獲取並渲染公告
-	fetchAnnouncements();
+	getMarqueeData();
+
+	// 初始化公告
+	getAnnouncements();
 });

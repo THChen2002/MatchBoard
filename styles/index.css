@@ -6,12 +6,16 @@
 .marquee-text {
 	animation: marquee 20s linear infinite;
 	white-space: nowrap;
+	font-size: 1.125rem;
 }
 
 .marquee-container {
 	overflow: hidden;
 	position: relative;
 	min-height: 1.5rem;
+	background-color: #ffd284;
+	padding: 0.5rem;
+	border-radius: 0.7rem;
 }
 
 /* 響應式調整 */
@@ -30,5 +34,8 @@
 	.marquee-text {
 		animation: marquee 30s linear infinite;
 		font-size: 0.875rem;
+	}
+	.marquee-container {
+		padding: 0.25rem;
 	}
 } 

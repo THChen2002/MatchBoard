@@ -1,5 +1,5 @@
 function fetchScheduleData() {
-    fetchData('results', function(response) {
+    fetchAndStoreData('results', function(response) {
 		// console.log('獲取賽程資料成功:', response);
 
 		// 循環賽隊伍
@@ -44,7 +44,7 @@ function fetchScheduleData() {
 		});
 
 		$('#scheduleContainer').show();
-		$('#loading-container').hide();
+		$('#loadingContainer').hide();
     }, function(xhr, status, error) {
         console.error('獲取隊伍資料失敗:', error);
     });
@@ -58,7 +58,7 @@ $(document).ready(function() {
 	}
 
 	$('#scheduleContainer').hide();
-	$('#loading-container').show();
+	$('#loadingContainer').show();
 	// 獲取賽程資料
 	fetchScheduleData();
 }); 

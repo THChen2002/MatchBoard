@@ -8,13 +8,13 @@ let pendingScores = {};
 function fetchMatchData() {
 	// 第一次載入時顯示loading動畫
 	if (isFirstLoad) {
-		$('#loading-container').show();
+		$('#loadingContainer').show();
 	}
 
 	fetchData('score', function(response) {
 		// 隱藏loading動畫（僅在第一次載入時）
 		if (isFirstLoad) {
-			$('#loading-container').hide();
+			$('#loadingContainer').hide();
 			// 顯示即時更新橫幅
 			$('#live-update-banner').removeClass('hidden').addClass('fade-in-down');
 			isFirstLoad = false;
@@ -119,7 +119,7 @@ function fetchMatchData() {
 	}, function(error) {
 		// 隱藏loading動畫（僅在第一次載入時）
 		if (isFirstLoad) {
-			$('#loading-container').hide();
+			$('#loadingContainer').hide();
 			// 顯示即時更新橫幅
 			$('#live-update-banner').removeClass('hidden').addClass('fade-in-down');
 			isFirstLoad = false;

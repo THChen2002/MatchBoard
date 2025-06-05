@@ -1,8 +1,8 @@
 function fetchResultsData() {
-    fetchData('results', function(response) {
+    fetchAndStoreData('results', function(response) {
         // console.log('獲取賽程資料成功:', response);
 		
-		// 循環賽隊伍
+		// 循環賽隊伍 & 分數
 		$('.round-robin-match').each(function() {
             const $this = $(this);
             const matchNo = $this.data('match-no');
@@ -21,17 +21,16 @@ function fetchResultsData() {
             }
         });
 
-		// 循環賽分數
         $('#resultsContainer').show();
-        $('#loading-container').hide();
+        $('#loadingContainer').hide();
     }, function(xhr, status, error) {
-        $('#loading-container').hide();
+        $('#loadingContainer').hide();
         console.error('獲取隊伍資料失敗:', error);
     });
 }
 
 $(document).ready(function() {
     $('#resultsContainer').hide();
-    $('#loading-container').show();
+    $('#loadingContainer').show();
     fetchResultsData();
 }); 
