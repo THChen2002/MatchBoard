@@ -40,17 +40,23 @@
 }
 
 .node-content {
-    background-color: white;
-    border: 1px solid #cbd5e1;
+    background-color: #ffffff;
+    border: 2px solid #fb923c;
     border-radius: 8px;
     padding: 12px;
     margin: 0 auto 10px auto;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 6px -1px rgba(251, 146, 60, 0.15), 0 2px 4px -1px rgba(251, 146, 60, 0.1);
     min-width: 200px;
     max-width: 100%;
     display: inline-block;
     position: relative;
     box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.node-content:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px -3px rgba(251, 146, 60, 0.2), 0 4px 6px -2px rgba(251, 146, 60, 0.15);
 }
 
 .node-bye {
@@ -79,46 +85,113 @@
     font-weight: bold;
     margin-bottom: 20px;
     padding: 12px;
-    background-color: #fffbeb;
-    border: 1px solid #fde68a;
+    background-color: #ffffff;
+    border: 2px solid #fb923c;
     border-radius: 8px;
     display: inline-block;
     max-width: 90%;
     box-sizing: border-box;
+    box-shadow: 0 4px 6px -1px rgba(251, 146, 60, 0.2);
 }
 
 .champion-info .score {
-    color: #ef4444;
+    color: #dc2626;
 }
 
 .champion-info .name {
-    color: #ca8a04;
+    color: #065f46;
     margin: 0 8px;
 }
 
-.winner-name {
+.round-name {
     font-size: 0.875rem;
     font-weight: 600;
-    color: #16a34a;
+    color: #065f46;
     margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+}
+
+/* Match number circle positioned in top-left corner */
+.match-number-circle {
+    background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
+    color: white;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 2px solid #ea580c;
+    box-shadow: 0 2px 4px rgba(251, 146, 60, 0.3);
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 10;
+}
+
+.match-number-circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(251, 146, 60, 0.4);
+}
+
+/* Winner name text - centered without circle */
+.round-name-text {
+    flex: 1;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #065f46;
+    margin: 0;
+}
+
+/* Match time box */
+.match-time-box {
+    background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
+    border: 2px solid #ea580c;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: white;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    display: inline-block;
+    box-shadow: 0 2px 4px rgba(251, 146, 60, 0.3);
+    transition: all 0.3s ease;
+}
+
+.match-time-box:hover {
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+    border-color: #c2410c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(251, 146, 60, 0.4);
 }
 
 .match-box {
-    border: 1px solid #e2e8f0;
+    border: 1px solid #fed7aa;
     border-radius: 6px;
     padding: 8px;
+    background-color: #ffffff;
 }
 
 .team {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 6px 0;
+    padding: 8px 6px;
     font-size: 0.875rem;
 }
 
 .team + .team {
-    border-top: 1px solid #f1f5f9;
+    border-top: none;
 }
 
 .team .name {
@@ -130,18 +203,54 @@
     text-overflow: ellipsis;
 }
 
-.team .score {
-    background-color: #3b82f6;
-    color: white;
-    padding: 2px 8px;
-    border-radius: 9999px;
+/* 新增的決賽比分樣式 */
+.team .score-blue {
+    background: transparent;
+    border: 2px solid #3b82f6;
+    color: #3b82f6;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
     font-size: 0.75rem;
-    font-weight: 500;
+    font-weight: 600;
     flex-shrink: 0;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
-.team .score.opponent {
-    background-color: #ef4444;
+.team .score-red {
+    background: transparent;
+    border: 2px solid #dc2626;
+    color: #dc2626;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 600;
+    flex-shrink: 0;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* 決賽獲勝隊伍的特殊樣式 */
+.team.team-blue.winning-team .score-blue {
+    background: #3b82f6;
+    color: white;
+    border: 2px solid #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+.team.team-red.winning-team .score-red {
+    background: #dc2626;
+    color: white;
+    border: 2px solid #dc2626;
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.3);
 }
 
 .tree ul {
@@ -170,7 +279,7 @@
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
-    border-left: 2px solid #94a3b8;
+    border-left: 2px solid #fb923c;
     height: 20px;
 }
 
@@ -184,7 +293,7 @@
     top: 0;
     left: 50%;
     width: 50%;
-    border-top: 2px solid #94a3b8;
+    border-top: 2px solid #fb923c;
     height: 0;
 }
 
@@ -194,7 +303,7 @@
     top: 0;
     right: 50%;
     width: 50%;
-    border-top: 2px solid #94a3b8;
+    border-top: 2px solid #fb923c;
     height: 0;
 }
 
@@ -209,6 +318,12 @@
 
 .tree li:only-child::before,
 .tree li:only-child::after {
+    display: none;
+}
+
+/* Hide top connection lines for root level tournament node */
+.tree > ul > li::before,
+.tree > ul > li::after {
     display: none;
 }
 
@@ -268,9 +383,10 @@
 .round-robin-group-wrapper h3 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #1e40af;
+    color: #7c2d12;
     margin-bottom: 1.5rem;
-    border-bottom: 2px solid #e2e8f0;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(90deg, #fb923c 0%, #f97316 100%) 1;
     padding-bottom: 0.75rem;
     width: 100%;
     text-align: center;
@@ -290,16 +406,17 @@
 /* Connection lines */
 .connection-line {
     position: absolute;
-    background-color: #333;
+    background-color: #fb923c;
     height: 3px;
     transform-origin: 0 0;
     z-index: 6;
+    box-shadow: 0 1px 2px rgba(251, 146, 60, 0.3);
 }
 
 /* Triangle nodes base styles */
 .triangle-node {
-    background-color: #e0f7fa;
-    border: 1px solid #b2ebf2;
+    background-color: #dbeafe;
+    border: 1px solid #60a5fa;
     border-radius: 8px;
     padding: 6px 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
@@ -307,7 +424,7 @@
     position: absolute;
     font-size: 0.9rem;
     font-weight: 500;
-    color: #006064;
+    color: #1e40af;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -318,9 +435,9 @@
 
 /* Team nodes */
 .triangle-node.team-node {
-    background-color: #c8e6c9;
-    border-color: #81c784;
-    color: #2e7d32;
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    border-color: #10b981;
+    color: #065f46;
     font-weight: 600;
     width: 38%;
     height: 14%;
@@ -339,6 +456,17 @@
     font-size: min(0.9rem, 8vw);
     max-width: 100%;
     box-sizing: border-box;
+    border-width: 2px;
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.triangle-node.team-node:hover {
+    background: linear-gradient(135deg, #a7f3d0 0%, #10b981 100%);
+    color: white;
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 6px 12px -1px rgba(16, 185, 129, 0.3);
 }
 
 /* Team node positions */
@@ -375,8 +503,8 @@
 
 /* Score nodes */
 .triangle-node.score-node {
-    background-color: #a7d9f7;
-    border-color: #60a5fa;
+    background: linear-gradient(135deg, #fed7aa 0%, #fb923c 100%);
+    border-color: #ea580c;
     color: white;
     font-weight: 600;
     padding: 6px 12px;
@@ -385,9 +513,18 @@
     height: 13%;
     min-width: 55px;
     min-height: 28px;
-    font-size: 0.85rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 1.3rem;
+    box-shadow: 0 4px 6px -1px rgba(251, 146, 60, 0.2);
     z-index: 12;
+    border-width: 2px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.triangle-node.score-node:hover {
+    background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 6px 15px -1px rgba(251, 146, 60, 0.3);
 }
 
 /* Score node positions */
@@ -490,6 +627,101 @@
     text-align: center;
 }
 
+.team-separator {
+    height: 1px;
+    background: linear-gradient(90deg, #fb923c 0%, #ea580c 100%);
+    margin: 6px 0;
+    border-radius: 1px;
+    box-shadow: 0 1px 2px rgba(251, 146, 60, 0.2);
+}
+
+/* 獲勝隊伍背景色樣式 */
+.team.winning-team {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    border-radius: 6px;
+    padding: 8px 6px;
+    margin: -2px 0;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+    transition: all 0.3s ease;
+}
+
+.team.winning-team.opponent-winning {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    box-shadow: 0 2px 4px rgba(220, 38, 38, 0.1);
+}
+
+/* 確保獲勝隊伍的文字顏色保持清晰 */
+.team.winning-team .name {
+    color: #1e40af;
+    font-weight: 600;
+}
+
+.team.winning-team.opponent-winning .name {
+    color: #991b1b;
+    font-weight: 600;
+}
+
+/* 冠軍戰基礎配色 - 藍紅底色 */
+.team.team-blue {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-radius: 6px;
+    padding: 8px 6px;
+    margin: -2px 0;
+    box-shadow: 0 2px 4px rgba(14, 165, 233, 0.1);
+    transition: all 0.3s ease;
+}
+
+.team.team-red {
+    background: linear-gradient(135deg, #fef2f2 0%, #fde8e8 100%);
+    border-radius: 6px;
+    padding: 8px 6px;
+    margin: -2px 0;
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.1);
+    transition: all 0.3s ease;
+}
+
+.team.team-blue .name {
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+.team.team-red .name {
+    color: #ef4444;
+    font-weight: 600;
+}
+
+/* 獲勝時的深色效果 */
+.team.team-blue.winning-team {
+    background: #2563eb;
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+}
+
+.team.team-red.winning-team {
+    background: #dc2626;
+    box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3);
+}
+
+.team.team-blue.winning-team .name {
+    color: white;
+    font-weight: 700;
+}
+
+.team.team-red.winning-team .name {
+    color: white;
+    font-weight: 700;
+}
+
+.team.team-blue.winning-team .score {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.team.team-red.winning-team .score {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
 
 @media (min-width: 768px) {
     .round-robin-groups-container {
@@ -564,7 +796,7 @@
         gap: 0.25rem;
         white-space: normal;
         line-height: 1.1;
-        min-height: 26px;
+        justify-content: flex-start;
         border-radius: 6px;
     }
 
