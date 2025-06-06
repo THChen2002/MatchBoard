@@ -355,4 +355,161 @@
 	.center-score {
 		font-size: 2.25rem;
 	}
+}
+
+/* 人氣投票區域樣式 */
+.voting-section {
+	margin-top: 1rem;
+	padding-top: 1rem;
+	border-top: 1px solid #e5e7eb;
+}
+
+.voting-title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: #6b7280;
+	margin-bottom: 0.75rem;
+}
+
+.voting-icon {
+	width: 1rem;
+	height: 1rem;
+	color: #ef4444;
+}
+
+.voting-options {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.vote-heart {
+	width: 3rem;
+	height: 3rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid transparent;
+	border-radius: 50%;
+	background-color: #f9fafb;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.vote-heart:hover {
+	transform: scale(1.1);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.vote-team1:hover {
+	border-color: #3b82f6;
+	background-color: rgba(59, 130, 246, 0.1);
+}
+
+.vote-team1:hover .heart-icon {
+	color: #3b82f6;
+}
+
+.vote-team2:hover {
+	border-color: #ef4444;
+	background-color: rgba(239, 68, 68, 0.1);
+}
+
+.vote-team2:hover .heart-icon {
+	color: #ef4444;
+}
+
+.heart-icon {
+	width: 1.5rem;
+	height: 1.5rem;
+	color: #9ca3af;
+	transition: all 0.3s ease;
+}
+
+.vote-progress-container {
+	flex: 1;
+	margin: 0 0.75rem;
+}
+
+.vote-percentages {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 0.25rem;
+	font-size: 0.85rem;
+	font-weight: 600;
+}
+
+.percentage-left {
+	color: #3b82f6;
+}
+
+.percentage-right {
+	color: #ef4444;
+}
+
+.vote-progress {
+	height: 1.5rem;
+	background-color: #e5e7eb;
+	border-radius: 0.75rem;
+	overflow: hidden;
+	display: flex;
+	position: relative;
+}
+
+.vote-bar {
+	height: 100%;
+	transition: width 0.8s ease-in-out;
+	position: relative;
+}
+
+.team1-bar {
+	background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.team2-bar {
+	background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* 投票後的效果 */
+.vote-heart.voted {
+	border-color: #10b981;
+	background-color: rgba(16, 185, 129, 0.2);
+}
+
+.vote-heart.voted .heart-icon {
+	color: #10b981;
+	transform: scale(1.1);
+}
+
+/* 手機版調整 */
+@media (max-width: 480px) {
+	.voting-title {
+		font-size: 0.8rem;
+	}
+	
+	.vote-heart {
+		width: 2.5rem;
+		height: 2.5rem;
+	}
+	
+	.heart-icon {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+	
+	.vote-percentages {
+		font-size: 0.8rem;
+	}
+	
+	.vote-progress {
+		height: 1.25rem;
+	}
+	
+	.vote-progress-container {
+		margin: 0 0.5rem;
+	}
 } 

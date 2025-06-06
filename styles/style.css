@@ -13,19 +13,16 @@ main {
 /* 載入期間的體驗改善 */
 .loading-active {
 	overflow: hidden;
+	height: 100vh;
 }
 
 .loading-active footer {
 	display: none;
 }
 
-/* 確保內容容器在載入時有適當的最小高度 */
-.loading-active main,
-.loading-active #matches-container,
-.loading-active #scheduleContainer,
-.loading-active #resultsContainer,
-.loading-active #teamsContainer {
-	min-height: 60vh;
+/* 載入期間隱藏主要內容 */
+.loading-active main {
+	display: none;
 }
 
 .logo {
