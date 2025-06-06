@@ -62,8 +62,10 @@ function fetchResultsData() {
 
         $('#resultsContainer').show();
         $('#loadingContainer').hide();
+        $('body').removeClass('loading-active');
     }, function(xhr, status, error) {
         $('#loadingContainer').hide();
+        $('body').removeClass('loading-active');
         console.error('獲取隊伍資料失敗:', error);
     });
 }
@@ -71,5 +73,6 @@ function fetchResultsData() {
 $(document).ready(function() {
     $('#resultsContainer').hide();
     $('#loadingContainer').show();
+    $('body').addClass('loading-active');
     fetchResultsData();
 }); 

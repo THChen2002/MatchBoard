@@ -58,7 +58,10 @@ function fetchScheduleData() {
 
 		$('#scheduleContainer').show();
 		$('#loadingContainer').hide();
+		$('body').removeClass('loading-active');
     }, function(xhr, status, error) {
+        $('#loadingContainer').hide();
+        $('body').removeClass('loading-active');
         console.error('獲取隊伍資料失敗:', error);
     });
 }
@@ -72,6 +75,7 @@ $(document).ready(function() {
 
 	$('#scheduleContainer').hide();
 	$('#loadingContainer').show();
+	$('body').addClass('loading-active');
 	// 獲取賽程資料
 	fetchScheduleData();
 }); 

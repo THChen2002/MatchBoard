@@ -61,6 +61,10 @@ const announcementTypeMap = {
 
 // 取得並儲存公告資料
 function getAnnouncements() {
+	// 顯示公告載入動畫，隱藏公告列表
+	$('#announcementLoading').show();
+	$('#announcementList').hide();
+	
 	fetchAndStoreData('announcements', function(data) {
 		announcements = data.announcements.map(item => {
 			const typeConfig = announcementTypeMap[item.type] || announcementTypeMap["一般"];
@@ -71,6 +75,10 @@ function getAnnouncements() {
 			};
 		});
 		renderAllAnnouncements();
+		
+		// 隱藏載入動畫，顯示公告列表
+		$('#announcementLoading').hide();
+		$('#announcementList').show();
 	}, function(xhr, status, error) {
 		console.error('獲取公告資料失敗:', error);
 		const $listContainer = $('#announcementList');
@@ -79,6 +87,10 @@ function getAnnouncements() {
 			.addClass('text-red-500 text-center p-4')
 			.text('無法獲取公告資料，請稍後再試。');
 		$listContainer.append($errorElement);
+		
+		// 隱藏載入動畫，顯示公告列表（即使有錯誤）
+		$('#announcementLoading').hide();
+		$('#announcementList').show();
 	});
 }
 
@@ -86,6 +98,21 @@ function getAnnouncements() {
 function renderAllAnnouncements() {
 	const $listContainer = $('#announcementList');
 	$listContainer.empty();
+	
+	if (!announcements || announcements.length === 0) {
+		// 如果沒有公告，顯示空狀態
+		const $emptyElement = $('<div></div>')
+			.addClass('text-gray-500 text-center p-8')
+			.html(`
+				<svg class="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-4.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 009.586 13H7"/>
+				</svg>
+				<p class="text-lg font-medium mb-2">暫無公告</p>
+				<p class="text-sm">目前沒有新的公告資訊</p>
+			`);
+		$listContainer.append($emptyElement);
+		return;
+	}
 	
 	$.each(announcements, function(index, announcement) {
 		const $announcementElement = $('<div></div>')
@@ -108,9 +135,9 @@ function renderAllAnnouncements() {
 }
 
 $(document).ready(function() {
-	// 初始化跑馬燈
+	// 初始化跑馬燈（非阻塞載入）
 	getMarqueeData();
 
-	// 初始化公告
+	// 初始化公告（會顯示載入動畫）
 	getAnnouncements();
 });

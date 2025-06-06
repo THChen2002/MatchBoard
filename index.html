@@ -227,9 +227,85 @@ c0.7,0,1.4-0.7,1.4-1.4v-10c0-0.7-0.7-1.4-1.4-1.4h-4.1v-6.4h21.9v6.4h-4.1c-0.7,0-
 				<div id="announcementList" class="space-y-3 sm:space-y-4">
 					<!-- 公告內容將由JavaScript動態生成 -->
 				</div>
+				
+				<!-- 公告載入動畫 -->
+				<div id="announcementLoading" class="flex flex-col items-center justify-center py-8" style="display: none;">
+					<div class="relative">
+						<div class="w-8 h-8 border-2 border-orange-200 rounded-full animate-spin"></div>
+						<div class="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin absolute top-0 left-0"></div>
+					</div>
+					<div class="mt-3 text-sm text-gray-600">載入公告中...</div>
+				</div>
 			</div>
 		</div>
 	</main>
+
+	<!-- Footer -->
+	<footer class="text-white mt-16" style="background: linear-gradient(to right, #f97316, #fbbf24);">
+		<div class="max-w-7xl mx-auto px-4 py-8">
+			<div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+				<!-- Logo and Website Name -->
+				<div class="flex items-center space-x-3">
+					<svg fill="#ffffff" width="32px" height="32px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1">
+						<path d="M20.59,6.9a0,0,0,0,1,0,0,.86.86,0,0,0-.07-.1A10,10,0,0,0,7.6,3l0,0h0l-.07,0a10,10,0,0,0-1,17.19h0l.33.2.1.07h0A9.93,9.93,0,0,0,12,22h.21A10,10,0,0,0,20.59,6.9ZM19,8.06a7.64,7.64,0,0,1,.65,1.46,10,10,0,0,0-3-.49.81.81,0,0,0-.31,0,9.78,9.78,0,0,0-3.58.73,7.85,7.85,0,0,1-1.84-1.6A8.16,8.16,0,0,1,19,8.06ZM12,4a7.86,7.86,0,0,1,4,1.07A7.77,7.77,0,0,0,15,5,10,10,0,0,0,9.8,6.47a8,8,0,0,1-.64-1.94A7.92,7.92,0,0,1,12,4ZM6,6.71A8.26,8.26,0,0,1,7.33,5.52A9.9,9.9,0,0,0,12,11.61a7.89,7.89,0,0,1-.77,2.88A8,8,0,0,1,6,7C6,6.9,6,6.81,6,6.71ZM4,12a8.1,8.1,0,0,1,.36-2.37,10,10,0,0,0,5.7,6.56,7.84,7.84,0,0,1-2.93,2.14A8,8,0,0,1,4,12Zm7.86,8a7.8,7.8,0,0,1-2.61-.49,9.94,9.94,0,0,0,3.23-3.22l0,0A10,10,0,0,0,14,11.41a7.71,7.71,0,0,1,1.78-.36A8,8,0,0,1,11.86,20Zm4.22-1.12A9.94,9.94,0,0,0,18,13a10.69,10.69,0,0,0-.18-1.88,8.34,8.34,0,0,1,2.17.7c0,.06,0,.12,0,.18A8,8,0,0,1,16.08,18.87Z" />
+					</svg>
+					<div>
+						<h3 class="text-xl font-bold">2025國北烤雞盃混合排球賽</h3>
+						<p class="text-yellow-100 text-sm">國立臺北教育大學</p>
+					</div>
+				</div>
+
+				<!-- Copyright, Social Links and GitHub -->
+				<div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
+					<!-- Copyright -->
+					<div class="text-center md:text-right">
+						<p class="text-yellow-100 text-sm">
+							© 2025 國北烤雞盃混合排球賽
+						</p>
+						<p class="text-yellow-200 text-xs mt-1">
+							All rights reserved.
+						</p>
+					</div>
+
+					<!-- Social Media Buttons -->
+					<div class="flex items-center space-x-3">
+						<!-- LINE Button -->
+						<a href="https://lin.ee/vwdSoAB" target="_blank" rel="noopener noreferrer" 
+						   class="w-10 h-10 bg-white bg-opacity-20 hover:bg-green-500 rounded-full flex items-center justify-center transition-all duration-300 group">
+							<svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+							</svg>
+						</a>
+
+						<!-- Instagram Button -->
+						<a href="https://www.instagram.com/roast_chicken_volleyball_" target="_blank" rel="noopener noreferrer" 
+						   class="w-10 h-10 bg-white bg-opacity-20 hover:bg-pink-500 rounded-full flex items-center justify-center transition-all duration-300 group">
+							<svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+							</svg>
+						</a>
+
+						<!-- Email Button -->
+						<a href="mailto:ntueroastchicken2025@gmail.com" 
+						   class="w-10 h-10 bg-white bg-opacity-20 hover:bg-blue-500 rounded-full flex items-center justify-center transition-all duration-300 group">
+							<svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+							</svg>
+						</a>
+					</div>
+
+					<!-- GitHub Button -->
+					<a href="https://github.com/THChen2002/MatchBoard" target="_blank" rel="noopener noreferrer" 
+					   class="inline-flex items-center px-4 py-2 bg-white bg-opacity-20 hover:bg-yellow-100 hover:bg-opacity-30 rounded-lg transition-all duration-300 group hover:text-yellow-100">
+						<svg class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+						</svg>
+						<span class="text-sm font-medium">原始碼</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</footer>
 </body>
 
 </html>

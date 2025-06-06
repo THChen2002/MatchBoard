@@ -9,12 +9,14 @@ function fetchMatchData() {
 	// 第一次載入時顯示loading動畫
 	if (isFirstLoad) {
 		$('#loadingContainer').show();
+		$('body').addClass('loading-active');
 	}
 
 	fetchData('score', function(response) {
 		// 隱藏loading動畫（僅在第一次載入時）
 		if (isFirstLoad) {
 			$('#loadingContainer').hide();
+			$('body').removeClass('loading-active');
 			// 顯示即時更新橫幅
 			$('#live-update-banner').removeClass('hidden').addClass('fade-in-down');
 			isFirstLoad = false;
@@ -120,6 +122,7 @@ function fetchMatchData() {
 		// 隱藏loading動畫（僅在第一次載入時）
 		if (isFirstLoad) {
 			$('#loadingContainer').hide();
+			$('body').removeClass('loading-active');
 			// 顯示即時更新橫幅
 			$('#live-update-banner').removeClass('hidden').addClass('fade-in-down');
 			isFirstLoad = false;
