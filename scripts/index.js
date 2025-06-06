@@ -26,7 +26,7 @@ function updateMarqueeDisplay() {
 	}
 }
 
-// Use fetchAndStoreData for marquee data
+// 取得並儲存跑馬燈資料
 function getMarqueeData() {
 	fetchAndStoreData('marquee', function(data) {
 		setMarqueeText(data.text);
@@ -59,10 +59,10 @@ const announcementTypeMap = {
 	}
 };
 
-// Use fetchAndStoreData for announcements
+// 取得並儲存公告資料
 function getAnnouncements() {
 	fetchAndStoreData('announcements', function(data) {
-		announcements = data.map(item => {
+		announcements = data.announcements.map(item => {
 			const typeConfig = announcementTypeMap[item.type] || announcementTypeMap["一般"];
 			return {
 				...item,
@@ -107,7 +107,6 @@ function renderAllAnnouncements() {
 	});
 }
 
-// 使用 jQuery 的文檔就緒事件
 $(document).ready(function() {
 	// 初始化跑馬燈
 	getMarqueeData();

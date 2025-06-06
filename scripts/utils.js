@@ -10,9 +10,9 @@ function fetchData(type, successCallback, errorCallback, data = {}) {
     });
 }
 
-// 取得並儲存資料到 localStorage
+// 取得並儲存資料到 sessionStorage
 function fetchAndStoreData(type, successCallback, errorCallback, data = {}) {
-    const storedData = localStorage.getItem(type);
+    const storedData = sessionStorage.getItem(type);
     if (storedData) {
         successCallback(JSON.parse(storedData));
     } else {
@@ -21,7 +21,7 @@ function fetchAndStoreData(type, successCallback, errorCallback, data = {}) {
             method: 'GET',
             data: data,
             success: function(response) {
-                localStorage.setItem(type, JSON.stringify(response));
+                sessionStorage.setItem(type, JSON.stringify(response));
                 successCallback(response);
             },
             error: errorCallback

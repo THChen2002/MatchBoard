@@ -1,5 +1,5 @@
 function fetchScheduleData() {
-    fetchAndStoreData('results', function(response) {
+    fetchData('results', function(response) {
 		// console.log('獲取賽程資料成功:', response);
 
 		// 循環賽隊伍
