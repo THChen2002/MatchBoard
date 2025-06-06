@@ -1,5 +1,16 @@
-// Utility function to fetch data from the API
 const API_URL = 'https://script.google.com/macros/s/AKfycbwrf8osm_3pH2_E8cJGwUnXGqBqrcIZzLFrRCd2_HDpJlKLaPoJwRofMH06bY4S0aD2/exec';
+
+// 將中文數字轉換為阿拉伯數字
+const chineseNumberMap = {
+    "一": 1, "二": 2, "三": 3, "四": 4, "五": 5,
+    "六": 6, "七": 7, "八": 8, "九": 9, "十": 10,
+    "十一": 11, "十二": 12, "十三": 13, "十四": 14, "十五": 15,
+    "十六": 16, "十七": 17, "十八": 18, "十九": 19,
+    "二十": 20, "廿": 20,
+    "廿一": 21, "廿二": 22, "廿三": 23, "廿四": 24, "廿五": 25, "廿六": 26, "廿七": 27, "廿八": 28, "廿九": 29,
+    "三十": 30, "卅": 30
+  };
+
 function fetchData(type, successCallback, errorCallback, data = {}) {
     $.ajax({
         url: `${API_URL}?type=${type}`,
@@ -36,7 +47,7 @@ function initializeData() {
     dataTypes.forEach(type => {
         if (!localStorage.getItem(type)) {
             fetchAndStoreData(type, function(data) {
-                console.log(`${type} data fetched and stored.`);
+                // console.log(`${type} data fetched and stored.`);
             }, function(xhr, status, error) {
                 console.error(`Failed to fetch ${type} data:`, error);
             });
