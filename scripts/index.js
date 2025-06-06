@@ -84,7 +84,7 @@ function getAnnouncements() {
 		const $listContainer = $('#announcementList');
 		$listContainer.empty();
 		const $errorElement = $('<div></div>')
-			.addClass('text-red-500 text-center p-4')
+			.addClass('text-red-500 text-center p-4 w-full break-words')
 			.text('無法獲取公告資料，請稍後再試。');
 		$listContainer.append($errorElement);
 		
@@ -102,7 +102,7 @@ function renderAllAnnouncements() {
 	if (!announcements || announcements.length === 0) {
 		// 如果沒有公告，顯示空狀態
 		const $emptyElement = $('<div></div>')
-			.addClass('text-gray-500 text-center p-8')
+			.addClass('text-gray-500 text-center p-8 w-full')
 			.html(`
 				<svg class="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-4.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 009.586 13H7"/>
@@ -116,7 +116,7 @@ function renderAllAnnouncements() {
 	
 	$.each(announcements, function(index, announcement) {
 		const $announcementElement = $('<div></div>')
-			.addClass(`border-l-4 ${announcement.bgClass} p-3 sm:p-4 rounded-r-lg`)
+			.addClass(`border-l-4 ${announcement.bgClass} p-3 sm:p-4 rounded-r-lg w-full`)
 			.html(`
 				<div class="flex items-start justify-between">
 					<div class="flex-1 min-w-0">
@@ -124,8 +124,8 @@ function renderAllAnnouncements() {
 							<span class="${announcement.typeClass} text-white text-xs px-2 py-1 rounded self-start">${announcement.type}</span>
 							<span class="text-gray-500 text-xs sm:text-sm">${announcement.date}</span>
 						</div>
-						<h4 class="font-semibold text-gray-800 mb-1 text-sm sm:text-base">${announcement.title}</h4>
-						<p class="text-gray-600 text-xs sm:text-sm leading-relaxed">${announcement.content}</p>
+						<h4 class="font-semibold text-gray-800 mb-1 text-sm sm:text-base break-words">${announcement.title}</h4>
+						<p class="text-gray-600 text-xs sm:text-sm leading-relaxed break-words">${announcement.content}</p>
 					</div>
 				</div>
 			`);
