@@ -476,13 +476,113 @@
 
 /* 投票後的效果 */
 .vote-heart.voted {
-	border-color: #10b981;
-	background-color: rgba(16, 185, 129, 0.2);
+	opacity: 0.6;
+	cursor: not-allowed;
 }
 
 .vote-heart.voted .heart-icon {
-	color: #10b981;
+	color: #9ca3af;
+	transform: scale(0.9);
+}
+
+/* 用戶已投票的按鈕高亮 */
+.vote-heart.user-voted {
+	background-color: #f97316;
+	border-color: #f97316;
+	opacity: 1 !important;
+	transform: scale(1.05);
+	box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
+}
+
+.vote-heart.user-voted .heart-icon {
+	color: #ffffff;
 	transform: scale(1.1);
+}
+
+/* 已投票指示器 */
+.voted-indicator {
+	font-size: 0.875rem;
+	color: #059669;
+	font-weight: 600;
+	margin-left: 0.5rem;
+}
+
+/* 投票訊息樣式 */
+.vote-message {
+	position: fixed;
+	top: 2rem;
+	left: 50%;
+	transform: translateX(-50%) translateY(-100px);
+	z-index: 1000;
+	opacity: 0;
+	transition: all 0.3s ease-in-out;
+	pointer-events: none;
+}
+
+.vote-message.show {
+	transform: translateX(-50%) translateY(0);
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.vote-message-content {
+	background-color: #ffffff;
+	border-radius: 0.75rem;
+	padding: 1rem 1.5rem;
+	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	min-width: 300px;
+	border-left: 4px solid;
+}
+
+.vote-message-success .vote-message-content {
+	border-left-color: #10b981;
+	background-color: #f0fdf4;
+}
+
+.vote-message-warning .vote-message-content {
+	border-left-color: #f59e0b;
+	background-color: #fffbeb;
+}
+
+.vote-message-info .vote-message-content {
+	border-left-color: #3b82f6;
+	background-color: #eff6ff;
+}
+
+.vote-message-text {
+	flex: 1;
+	font-weight: 600;
+	color: #374151;
+}
+
+.vote-message-success .vote-message-text {
+	color: #065f46;
+}
+
+.vote-message-warning .vote-message-text {
+	color: #92400e;
+}
+
+.vote-message-info .vote-message-text {
+	color: #1e40af;
+}
+
+.vote-message-close {
+	background: none;
+	border: none;
+	font-size: 1.25rem;
+	color: #6b7280;
+	cursor: pointer;
+	padding: 0.25rem;
+	line-height: 1;
+	transition: color 0.2s ease;
+}
+
+.vote-message-close:hover {
+	color: #374151;
 }
 
 /* 手機版調整 */

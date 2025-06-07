@@ -4,11 +4,16 @@ let isFirstLoad = true;
 let previousScores = {};
 // 儲存即將更新的分數資料
 let pendingScores = {};
+// 儲存用戶投票記錄 (格式: {matchKey: teamIndex})
+let userVotes = JSON.parse(sessionStorage.getItem('userVotes') || '{}');
+// 儲存當前投票數據 (格式: {matchKey: [team1Votes, team2Votes]})
+let currentVotesData = {};
 
 function fetchMatchData() {
 	// 載入動畫已經在HTML中預設顯示
-
 	fetchData('score', function(response) {
+		// console.log('獲取比賽資料成功:', response);
+		
 		// 隱藏loading動畫（僅在第一次載入時）
 		if (isFirstLoad) {
 			$('#loadingContainer').hide();
@@ -94,6 +99,10 @@ function updateSingleCard($card, match, matchKey) {
 	$card.find('[data-field]').text(`${match.field}場地`);
 	$card.find('[data-set]').text(`第${match.set}局`);
 	$card.find('[data-match-no]').text(`場次：${match.matchNo}`);
+	$card.attr('data-field', match.field);
+	$card.attr('data-set', match.set);
+	$card.attr('data-match-no', match.matchNo);
+
 	
 	// 更新隊伍名稱
 	$card.find('[data-team1-name]').text(match.teams[0]);
@@ -132,21 +141,183 @@ function updateSingleCard($card, match, matchKey) {
 		}
 	}
 	
-	// TODO: 更新投票數據 (模擬數據)
-	const team1Votes = Math.floor(Math.random() * 100) + 20;
-	const team2Votes = Math.floor(Math.random() * 100) + 20;
-	const totalVotes = team1Votes + team2Votes;
-	const team1Percentage = Math.round((team1Votes / totalVotes) * 100);
-	const team2Percentage = 100 - team1Percentage;
+	// 更新投票數據
+	const team1Votes = match.votes[0];
+	const team2Votes = match.votes[1];
 	
-	$card.find('[data-total-votes]').text(totalVotes);
-	$card.find('[data-team1-percentage]').text(`${team1Percentage}%`);
-	$card.find('[data-team2-percentage]').text(`${team2Percentage}%`);
-	$card.find('[data-team1-bar]').css('width', `${team1Percentage}%`);
-	$card.find('[data-team2-bar]').css('width', `${team2Percentage}%`);
+	// 檢查是否需要跳過投票數據更新（避免樂觀更新被覆蓋）
+	let shouldSkipVoteUpdate = false;
+	if (userVotes[matchKey] !== undefined && currentVotesData[matchKey]) {
+		const [prevTeam1, prevTeam2] = currentVotesData[matchKey];
+		const prevTotal = prevTeam1 + prevTeam2;
+		const newTotal = team1Votes + team2Votes;
+		
+		// 如果用戶已投票，但新數據的總票數沒有增加，說明後端還沒處理完
+		if (newTotal <= prevTotal) {
+			shouldSkipVoteUpdate = true;
+		}
+	}
+	
+	// 儲存真實票數到全域變數
+	currentVotesData[matchKey] = [team1Votes, team2Votes];
+	
+	// 只有在不需要跳過時才更新投票顯示
+	if (!shouldSkipVoteUpdate) {
+		const totalVotes = team1Votes + team2Votes;
+		const team1Percentage = totalVotes === 0 ? 50 : Math.round((team1Votes / totalVotes) * 100);
+		const team2Percentage = 100 - team1Percentage;
+		
+		$card.find('[data-team1-percentage]').text(`${team1Percentage}%`);
+		$card.find('[data-team2-percentage]').text(`${team2Percentage}%`);
+		$card.find('[data-team1-bar]').css('width', `${team1Percentage}%`);
+		$card.find('[data-team2-bar]').css('width', `${team2Percentage}%`);
+	}
+	
+	// 更新投票按鈕狀態
+	updateVotingButtonStates($card, matchKey);
 }
 
+// 更新投票按鈕狀態
+function updateVotingButtonStates($card, matchKey) {
+	const $team1Button = $card.find('[data-vote-team1]');
+	const $team2Button = $card.find('[data-vote-team2]');
+	const $votingTitle = $card.find('.voting-title');
+	
+	// 檢查用戶是否已投票
+	const userVote = userVotes[matchKey];
+	
+	if (userVote !== undefined) {
+		// 用戶已投票
+		$team1Button.addClass('voted').prop('disabled', true);
+		$team2Button.addClass('voted').prop('disabled', true);
+		
+		// 標記用戶投票的按鈕
+		if (userVote === 0) {
+			$team1Button.addClass('user-voted');
+		} else if (userVote === 1) {
+			$team2Button.addClass('user-voted');
+		}
+		
+		// 更新投票標題（先檢查是否已存在）
+		if ($votingTitle.find('.voted-indicator').length === 0) {
+			$votingTitle.find('svg').after('<span class="voted-indicator">（已投票）</span>');
+		}
+	} else {
+		// 用戶未投票，確保按鈕可用
+		$team1Button.removeClass('voted user-voted').prop('disabled', false);
+		$team2Button.removeClass('voted user-voted').prop('disabled', false);
+		$votingTitle.find('.voted-indicator').remove();
+	}
+}
 
+// 處理投票點擊
+function handleVote(matchKey, teamIndex, $card) {
+	// 檢查是否已投票
+	if (userVotes[matchKey] !== undefined) {
+		showVoteMessage('您已經為此場比賽投過票了！', 'warning');
+		return;
+	}
+	
+	// 記錄投票
+	userVotes[matchKey] = teamIndex;
+	sessionStorage.setItem('userVotes', JSON.stringify(userVotes));
+	
+	// 顯示投票成功訊息
+	const teamName = teamIndex === 0 ? 
+		$card.find('[data-team1-name]').text() : 
+		$card.find('[data-team2-name]').text();
+	showVoteMessage(`投票成功！您支持：${teamName}`, 'success');
+	
+	// 立即更新投票進度條（使用真實票數+1）
+	if (currentVotesData[matchKey]) {
+		let [team1Votes, team2Votes] = currentVotesData[matchKey];
+		
+		// 給投票的隊伍+1票
+		if (teamIndex === 0) {
+			team1Votes += 1;
+		} else {
+			team2Votes += 1;
+		}
+		
+		// 重新計算百分比
+		const newTotal = team1Votes + team2Votes;
+		const newTeam1Percentage = Math.round((team1Votes / newTotal) * 100);
+		const newTeam2Percentage = 100 - newTeam1Percentage;
+		
+		// 更新顯示
+		$card.find('[data-team1-percentage]').text(`${newTeam1Percentage}%`);
+		$card.find('[data-team2-percentage]').text(`${newTeam2Percentage}%`);
+		$card.find('[data-team1-bar]').css('width', `${newTeam1Percentage}%`);
+		$card.find('[data-team2-bar]').css('width', `${newTeam2Percentage}%`);
+	}
+	
+	// 更新按鈕狀態
+	updateVotingButtonStates($card, matchKey);
+	
+	// 發送投票數據到後端
+	sendVoteToServer(matchKey, teamIndex);
+}
+
+// 發送投票到後端
+function sendVoteToServer(matchKey, teamIndex) {
+	$.ajax({
+		url: API_URL,
+		method: 'POST',
+		data: {
+			type: 'vote',
+			matchKey, 
+			teamIndex
+		},
+		success: function(response) {
+			console.log('投票成功:', response);
+		},
+		error: function(error) {
+			console.error('投票失敗:', error);
+		}
+	});
+}
+
+// 顯示投票訊息
+function showVoteMessage(message, type = 'info') {
+	// 移除之前的訊息
+	$('.vote-message').remove();
+	
+	// 創建訊息元素
+	const $message = $(`
+		<div class="vote-message vote-message-${type}">
+			<div class="vote-message-content">
+				<span class="vote-message-text">${message}</span>
+				<button class="vote-message-close">&times;</button>
+			</div>
+		</div>
+	`);
+	
+	// 添加到頁面
+	$('body').append($message);
+	
+	// 顯示動畫
+	setTimeout(() => {
+		$message.addClass('show');
+	}, 10);
+	
+	// 自動隱藏
+	setTimeout(() => {
+		hideVoteMessage($message);
+	}, 3000);
+	
+	// 點擊關閉
+	$message.find('.vote-message-close').on('click', function() {
+		hideVoteMessage($message);
+	});
+}
+
+// 隱藏投票訊息
+function hideVoteMessage($message) {
+	$message.removeClass('show');
+	setTimeout(() => {
+		$message.remove();
+	}, 300);
+}
 
 function triggerScoreAnimationForCard($card, matchKey, callback) {
 	if (pendingScores[matchKey]) {
@@ -223,4 +394,27 @@ $(document).ready(function() {
 	setInterval(() => {
 		fetchMatchData();
 	}, 5000);
+	
+	// 綁定投票按鈕事件
+	$(document).on('click', '[data-vote-team1], [data-vote-team2]', function(e) {
+		e.preventDefault();
+		
+		const $button = $(this);
+		const $card = $button.closest('.match-card');
+		
+		// 動態生成 matchKey：場地-場次
+		const field = $card.data('field');
+		const matchNo = $card.data('match-no');
+		const matchKey = `${field}-${matchNo}`;
+		
+		const teamIndex = $button.hasClass('vote-team1') ? 0 : 1;
+		
+		// 檢查是否已被禁用
+		if ($button.prop('disabled')) {
+			return;
+		}
+		
+		// 處理投票
+		handleVote(matchKey, teamIndex, $card);
+	});
 }); 

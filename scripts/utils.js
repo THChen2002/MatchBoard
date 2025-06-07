@@ -1,4 +1,4 @@
-const API_URL = 'https://script.google.com/macros/s/AKfycbwrf8osm_3pH2_E8cJGwUnXGqBqrcIZzLFrRCd2_HDpJlKLaPoJwRofMH06bY4S0aD2/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbxlzdlEeBU5HImoIV5PJWKYo8ORKfGUO2Dli9UslEC-EDlP7G6CkMIr_Qg-AbBUdKLV/exec';
 
 // 將中文數字轉換為阿拉伯數字
 const chineseNumberMap = {
