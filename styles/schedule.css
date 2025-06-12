@@ -47,7 +47,7 @@
     margin: 0 auto 10px auto;
     box-shadow: 0 4px 6px -1px rgba(251, 146, 60, 0.15), 0 2px 4px -1px rgba(251, 146, 60, 0.1);
     min-width: 200px;
-    max-width: 100%;
+    width: auto;
     display: inline-block;
     position: relative;
     box-sizing: border-box;
@@ -198,9 +198,10 @@
     margin-right: 8px;
     text-align: left;
     flex-grow: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: visible;
+    word-wrap: break-word;
+    line-height: 1.3;
 }
 
 /* 新增的決賽比分樣式 */
@@ -440,19 +441,18 @@
     color: #065f46;
     font-weight: 600;
     width: 38%;
-    height: 14%;
-    min-width: 100px;
     min-height: 35px;
+    min-width: 100px;
     border-radius: 8px;
     white-space: normal;
     word-break: break-word;
     line-height: 1.2;
-    overflow: hidden;
+    overflow: visible;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 4px 6px;
+    padding: 8px 6px;
     font-size: min(0.9rem, 8vw);
     max-width: 100%;
     box-sizing: border-box;
@@ -460,6 +460,7 @@
     box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.15);
     transition: all 0.3s ease;
     cursor: pointer;
+    height: auto;
 }
 
 .triangle-node.team-node:hover {
@@ -547,11 +548,13 @@
 .ranking-container {
     position: relative;
     display: flex;
+    flex-direction: row;
     gap: 0.3rem;
     justify-content: center;
     align-items: stretch;
     width: 100%;
     max-width: 90vw;
+    margin-top: 20px;
     flex-wrap: wrap;
 }
 
@@ -620,11 +623,13 @@
     font-weight: 600;
     white-space: normal;
     overflow: visible;
-    text-overflow: unset;
     min-width: 0;
     word-break: break-word;
     line-height: 1.3;
     text-align: center;
+    flex: 1;
+    font-size: 0.9rem;
+    text-align: left;
 }
 
 .team-separator {
@@ -730,17 +735,69 @@
 }
 
 @media (max-width: 1024px) {
+    #schedule {
+        padding: 10px;
+    }
+
+    .tournament-container {
+        padding: 10px;
+    }
+
+    .node-content {
+        min-width: 180px;
+        padding: 8px;
+    }
+
+    .champion-info {
+        font-size: 1.25rem;
+        padding: 8px;
+    }
+
+    .team {
+        font-size: 0.8rem;
+    }
+
+    .team .score {
+        padding: 1px 6px;
+        font-size: 0.7rem;
+    }
+
+    .round-robin-triangle-wrapper {
+        margin-bottom: 15px;
+    }
+
+    .round-robin-group-wrapper {
+        min-width: 0;
+        min-height: 0;
+        padding: 1rem;
+    }
+
+    .triangle-node.team-node {
+        font-size: 0.8rem;
+        min-width: 110px;
+        min-height: 38px;
+        padding: 6px 8px;
+        line-height: 1.0;
+        width: 39%;
+    }
+
+    .triangle-node.score-node {
+        min-width: 28px;
+        min-height: 20px;
+        font-size: 0.8rem;
+        padding: 2px 4px;
+    }
+
     .ranking-container {
         flex-direction: column;
         gap: 0.3rem;
-        max-width: 85vw;
+        max-width: 90vw;
     }
 
     .ranking-box {
-        font-size: 0.6rem;
+        font-size: 0.55rem;
         padding: 0.3rem 0.5rem;
-        gap: 0.3rem;
-        min-height: 28px;
+        gap: 0.25rem;
         white-space: normal;
         line-height: 1.1;
         justify-content: flex-start;
@@ -748,11 +805,7 @@
     }
 
     .rank-icon {
-        font-size: 0.8rem;
-    }
-
-    .rank-text {
-        text-align: left;
+        font-size: 0.75rem;
     }
 }
 
@@ -784,6 +837,32 @@
         font-size: 0.7rem;
     }
 
+    .round-robin-triangle-wrapper {
+        margin-bottom: 15px;
+    }
+
+    .round-robin-group-wrapper {
+        min-width: 0;
+        min-height: 0;
+        padding: 1rem;
+    }
+
+    .triangle-node.team-node {
+        font-size: 0.8rem;
+        min-width: 110px;
+        min-height: 38px;
+        padding: 6px 8px;
+        line-height: 1.0;
+        width: 39%;
+    }
+
+    .triangle-node.score-node {
+        min-width: 28px;
+        min-height: 20px;
+        font-size: 0.8rem;
+        padding: 2px 4px;
+    }
+
     .ranking-container {
         flex-direction: row;
         gap: 0.3rem;
@@ -798,91 +877,16 @@
         line-height: 1.1;
         justify-content: flex-start;
         border-radius: 6px;
+        flex: 1;
     }
 
     .rank-icon {
         font-size: 0.75rem;
     }
-}
-
-@media (max-width: 520px) {
-    .round-robin-triangle-wrapper {
-        margin-bottom: 15px;
-    }
-
-    .ranking-container {
-        flex-direction: column;
-        gap: 0.3rem;
-        max-width: 87vw;
-    }
-
-    .ranking-box {
-        font-size: 0.55rem;
-        padding: 0.3rem 0.45rem;
-        gap: 0.25rem;
-        white-space: normal;
-        min-height: 40px;
-        line-height: 1.1;
-        justify-content: flex-start;
-        border-radius: 6px;
-    }
-
     .rank-text {
-        text-align: left;
+        font-size: 0.8rem;
     }
-
-    .rank-icon {
-        font-size: 0.7rem;
-    }
-}
-
-@media (max-width: 500px) {
-    .round-robin-group-wrapper {
-        min-width: 0;
-        min-height: 0;
-        padding: 0.5vw;
-    }
-
-    .triangle-node.team-node {
-        min-width: 60px;
-        min-height: 28px;
-        font-size: 0.65rem;
-        padding: 2px 4px;
-        line-height: 1.1;
-        word-break: break-all;
-        hyphens: auto;
-    }
-
-    .triangle-node.score-node {
-        min-width: 28px;
-        min-height: 20px;
-        font-size: 0.65rem;
-        padding: 2px 4px;
-    }
-
-    .ranking-container {
-        flex-direction: column;
-        gap: 0.6rem;
-        max-width: 85vw;
-        padding: 5px 10px;
-    }
-
-    .ranking-box {
-        font-size: 0.7rem;
-        padding: 0.6rem 0.8rem;
-        gap: 0.4rem;
-        white-space: normal;
-        line-height: 1.2;
-        justify-content: flex-start;
-    }
-
-    .rank-text {
-        text-align: left;
-    }
-
-    .rank-icon {
-        font-size: 0.9rem;
-    }
+    
 }
 
 @media (max-width: 480px) {
@@ -894,97 +898,52 @@
         font-size: 0.75rem;
     }
 
+    .round-robin-group-wrapper {
+        min-width: 0;
+        min-height: 0;
+        padding: 0.5rem;
+    }
+
     .triangle-node.team-node {
-        font-size: 0.6rem;
+        font-size: 0.7rem;
         min-width: 55px;
         min-height: 26px;
-        padding: 1px 3px;
+        padding: 2px 4px;
         line-height: 1.0;
+        letter-spacing: -0.3px;
+    }
+
+    .triangle-node.score-node {
+        min-width: 25px;
+        min-height: 18px;
+        font-size: 0.6rem;
+        padding: 1px 3px;
     }
 
     .ranking-container {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.4rem;
         max-width: 80vw;
-    }
-
-    .ranking-box {
-        font-size: 0.65rem;
-        padding: 0.5rem 0.7rem;
-        gap: 0.35rem;
-        border-radius: 8px;
-        white-space: normal;
-        line-height: 1.2;
-        justify-content: flex-start;
-    }
-
-    .rank-text {
-        text-align: left;
-    }
-
-    .rank-icon {
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 400px) {
-    .triangle-node.team-node {
-        font-size: 0.40rem;
-        min-width: 50px;
-        min-height: 24px;
-        padding: 1px 2px;
-        line-height: 0.9;
-        letter-spacing: -0.5px;
-    }
-
-    .ranking-container {
-        flex-direction: column;
-        gap: 0.3rem;
-        max-width: 75vw;
+        padding: 5px 10px;
     }
 
     .ranking-box {
         font-size: 0.6rem;
-        padding: 0.35rem 0.5rem;
-        gap: 0.25rem;
+        padding: 0.4rem 0.6rem;
+        gap: 0.3rem;
         border-radius: 6px;
         white-space: normal;
         line-height: 1.2;
         justify-content: flex-start;
+        min-height: 32px;
     }
 
     .rank-text {
         text-align: left;
+        font-size: 0.8rem;
     }
 
     .rank-icon {
-        font-size: 0.7rem;
-    }
-}
-
-@media (max-width: 320px) {
-    .ranking-container {
-        flex-direction: column;
-        gap: 0.25rem;
-        max-width: 70vw;
-    }
-
-    .ranking-box {
-        font-size: 0.55rem;
-        padding: 0.3rem 0.4rem;
-        gap: 0.2rem;
-        border-radius: 4px;
-        white-space: normal;
-        line-height: 1.1;
-        justify-content: flex-start;
-    }
-
-    .rank-text {
-        text-align: left;
-        font-size: 0.5rem;
-    }
-
-    .rank-icon {
-        font-size: 0.65rem;
+        font-size: 0.75rem;
     }
 }
