@@ -13,12 +13,14 @@
 	overflow: hidden;
 	position: relative;
 	min-height: 1.5rem;
+	display: flex;
+	align-items: center;
 }
 
 /* 響應式調整 */
 @media (max-width: 768px) {
 	.marquee-text {
-		animation: marquee 25s linear infinite;
+		animation: marquee 15s linear infinite;
 		font-size: 1rem;
 	}
 	.announcement-button {
@@ -28,8 +30,11 @@
 }
 
 @media (max-width: 480px) {
+	.announcementText{
+		display: none;
+	}
 	.marquee-text {
-		animation: marquee 30s linear infinite;
+		animation: marquee 10s linear infinite;
 		font-size: 0.875rem;
 	}
 } 
