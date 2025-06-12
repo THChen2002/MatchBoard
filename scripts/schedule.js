@@ -23,6 +23,39 @@ function fetchScheduleData() {
                 $this.text(matchData.gameScore);
             }
 		});
+
+		// 小組排名
+		$('.ranking-container').each(function() {
+			const $this = $(this);
+			const group = $this.data('group');
+			$this.find('.ranking-box').each(function(idx) {
+				const ranking = idx + 1;
+				const $box = $(this);
+				const teamName = response.roundResults.find(result => result.group === group && result.rank === ranking)?.team || '';
+
+				$box.find('.rank-text').text(teamName);
+			});
+
+		});
+
+		// 種子隊伍
+		$('.node-content[data-seed]').each(function() {
+			const $this = $(this);
+			const seed = $this.data('seed');
+			const matchData = response.matches.find(match => match.matchNo === seed);
+
+			if (matchData) {
+				// 更新種子隊伍名稱
+				if (matchData.matchNo === '廿三' || matchData.matchNo === '廿四') {
+					// 特別處理廿三和廿四的種子隊伍
+					$this.find('.name').text(matchData.teams[0]);
+				}
+				else {
+					$this.find('.name').text(matchData.teams[1]);
+				}
+			}
+		}
+		);
 		
 		// 複決賽隊伍及比分
 		$('.node-content').each(function() {
@@ -40,8 +73,8 @@ function fetchScheduleData() {
 				const blueScore = parseInt(scores[0]);
 				const redScore = parseInt(scores[1]);
 				
-				$this.find('.team-blue .score').text(blueScore);
-				$this.find('.team-red .score').text(redScore);
+				$this.find('.team-blue .score-blube').text(blueScore);
+				$this.find('.team-red .score-red').text(redScore);
 				
 				// 判斷贏家並加上 winning-team class
 				const $blueTeam = $this.find('.team-blue');
@@ -55,6 +88,8 @@ function fetchScheduleData() {
 				}
 			}
 		});
+
+
 
 		$('#scheduleContainer').show();
 		$('#loadingContainer').hide();
