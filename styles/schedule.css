@@ -414,6 +414,26 @@
     box-shadow: 0 1px 2px rgba(251, 146, 60, 0.3);
 }
 
+.connection-line.top-left {
+    top: 9.24%;
+    left: 50%;
+    width: 85%;
+    transform: rotate(120deg);
+}
+
+.connection-line.top-right {
+    top: 9.24%;
+    left: 50%;
+    width: 85%;
+    transform: rotate(60deg);
+}
+
+.connection-line.bottom {
+    top: 90.76%;
+    width: 85%;
+    transform: rotate(0deg);
+}
+
 /* Triangle nodes base styles */
 .triangle-node {
     background-color: #dbeafe;
@@ -478,12 +498,12 @@
 
 .triangle-node.team-node.vertex-bottom-left {
     top: 90.76%;
-    left: 16.67%;
+    left: 12.67%;
 }
 
 .triangle-node.team-node.vertex-bottom-right {
     top: 90.76%;
-    left: 83.33%;
+    left: 87.33%;
 }
 
 /* Alternative team positions */
@@ -530,13 +550,15 @@
 
 /* Score node positions */
 .triangle-node.score-node.score-top-left-side {
-    top: 50%;
-    left: 33.335%;
+    top: 43%;
+    left: 20%;
+    transform: rotate(300deg);
 }
 
 .triangle-node.score-node.score-top-right-side {
-    top: 50%;
-    left: 66.665%;
+    top: 43%;
+    left: 60%;
+    transform: rotate(60deg);
 }
 
 .triangle-node.score-node.score-bottom-side {

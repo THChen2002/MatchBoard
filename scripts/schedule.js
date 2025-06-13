@@ -20,7 +20,16 @@ function fetchScheduleData() {
             const matchData = response.matches.find(match => match.matchNo === matchNo);
 
             if (matchData) {
-                $this.text(matchData.gameScore);
+				// 右上角比分要對調
+				if ($this.hasClass('score-top-right-side')) {
+					const scores = matchData.gameScore.split(':');
+					const blueScore = parseInt(scores[0]);
+					const redScore = parseInt(scores[1]);
+					// 更新右上角比分
+					$this.text(`${redScore}:${blueScore}`);
+				} else {
+					$this.text(matchData.gameScore);
+				}
             }
 		});
 
