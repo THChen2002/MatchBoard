@@ -73,6 +73,10 @@ function fetchScheduleData() {
 			const matchData = response.matches.find(match => match.matchNo === matchNo);
 
 			if (matchData) {
+				// 更新場次
+				$this.find('.match-number-circle').text(matchData.matchNo);
+				$this.find('.match-time-box').text(matchData.time);
+
 				// 更新隊伍名稱
 				$this.find('.team-blue .name').text(matchData.teams[0]);
 				$this.find('.team-red .name').text(matchData.teams[1]);
@@ -89,7 +93,6 @@ function fetchScheduleData() {
 				const $blueTeam = $this.find('.team-blue');
 				const $redTeam = $this.find('.team-red');
 				
-				// 給贏的隊伍加上 winning-team class
 				if (blueScore > redScore) {
 					$blueTeam.addClass('winning-team');
 				} else if (redScore > blueScore) {

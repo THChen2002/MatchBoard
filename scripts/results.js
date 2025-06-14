@@ -8,6 +8,10 @@ function fetchResultsData() {
             const matchNo = $this.data('match-no');
             const matchData = response.matches.find(match => match.matchNo === matchNo);
             if (matchData) {
+                // 場次
+                $this.find('.match-number').text(`(${matchData.matchNo})`);
+                // 時間
+                $this.find('.match-time').text(matchData.time);
                 // 隊伍
                 const $teamLeft = $this.find('.team-container .team-left');
                 const $teamRight = $this.find('.team-container .team-right');

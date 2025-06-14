@@ -1,4 +1,4 @@
-const API_URL = 'https://script.google.com/macros/s/AKfycbz1a0SiMJIFRMSINgl9cziCMQ8Y7xXED5QWr5Lp9rh89OZY2QgezY1uc-x4xSjZcKTiQA/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbx9MoJ6IF56pJhwrkm2Wd41l-0WwpXYO_nuat9yob9dPTnhzpnJ08HMtaO8MIjQxgRy/exec';
 
 // 將中文數字轉換為阿拉伯數字
 const chineseNumberMap = {
@@ -47,7 +47,7 @@ function initializeData() {
     dataTypes.forEach(type => {
         if (!localStorage.getItem(type)) {
             fetchAndStoreData(type, function(data) {
-                // console.log(`${type} data fetched and stored.`);
+                // console.log(`Fetched ${type} data successfully:`, data);
             }, function(xhr, status, error) {
                 console.error(`Failed to fetch ${type} data:`, error);
             });

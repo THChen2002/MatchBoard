@@ -1,4 +1,4 @@
-const SPREADSHEET_ID = "";
+const SPREADSHEET_ID = "1wcNSyGv0QQEnjr-5UHOqsmnniSeUSX2F1XNYW23ISZs";
 
 function doGet(e) {
   const type = e.parameter.type;
@@ -26,16 +26,14 @@ function doPost(e) {
 
   if (type === "vote") {
     return handleVote(params);
-  }
-
-  // 你可以擴充其他 type 處理
-  else {
+  } else {
     return ContentService.createTextOutput(
       JSON.stringify({ success: false, message: `Unknown type: ${type}` })
     ).setMimeType(ContentService.MimeType.JSON);
   }
 }
 
+// 處理投票
 function handleVote(params) {
   const matchKey = params.matchKey;
   const teamIndex = parseInt(params.teamIndex);
@@ -52,8 +50,8 @@ function handleVote(params) {
 
     if (currentMatchKey === matchKey) {
       // votes 欄位在 i+3
-      const voteRow = 4 + teamIndex; // row 4 or 5 (index base 1)
-      const voteCol = i + 3 + 1;     // column index base 1
+      const voteRow = 4 + teamIndex;
+      const voteCol = i + 3 + 1;
 
       const voteCell = sheet.getRange(voteRow, voteCol);
       const currentVotes = voteCell.getValue();
@@ -174,7 +172,7 @@ function handleResults() {
   const matches = [];
 
   for (let row = 1; row < data.length; row += 3) {
-    const time = data[row][0]?.replace(/\n/g, '').replace(/[|｜]/, '～');;
+    const time = data[row][0];
 
     for (let col = 1; col < data[0].length; col += 5) {
       const field = data[0][col];
@@ -207,6 +205,7 @@ function handleResults() {
       });
     }
   }
+
   const roundResults = handleRoundResults();
   return ContentService
     .createTextOutput(JSON.stringify({ matches, roundResults}, null, 2))
