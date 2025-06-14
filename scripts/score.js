@@ -52,14 +52,79 @@ function fetchMatchData() {
 
 function updateMatchCards(matches) {
 	matches.forEach((match, index) => {
+		const matchNo = match.matchNo;
 		const $card = $('.match-card[data-match-index="' + index + '"]');
+
+		// 如果沒有找到對應的卡片，則跳過
 		if ($card.length === 0) {
-			// 如果沒有對應的預定義卡片，跳過
 			return;
 		}
+
+		// 如果沒有場次，顯示無比賽狀態
+		if (!matchNo) {
+			$card.find('[data-field]').text(`${match.field}場地`);
+			
+			// 隱藏場次和局數標籤（只在無比賽時）
+			$card.find('[data-set], [data-match-no]').addClass('hidden');
+			
+			// 修改投票區域顯示無比賽狀態
+			const $votingSection = $card.find('.voting-section');
+			$votingSection.find('.voting-title').html(`
+				<svg class="voting-icon" fill="currentColor" viewBox="0 0 24 24">
+					<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+				</svg>
+				人氣投票
+			`);
+			
+			// 隱藏投票按鈕，在進度條區域顯示無比賽訊息
+			$votingSection.find('.vote-heart').hide();
+			$votingSection.find('.vote-progress-container').html(`
+				<div class="no-match-message">
+					<svg class="info-icon" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+					</svg>
+					<span>目前無比賽</span>
+				</div>
+			`);
+			$votingSection.show();
+			
+			// 添加無比賽的視覺效果
+			$card.addClass('no-match');
+			return;
+		}
+
+		// 移除無比賽的視覺效果（如果有）
+		$card.removeClass('no-match');
+		
+		// 確保場次和局數標籤顯示（有比賽時）
+		$card.find('[data-set], [data-match-no]').removeClass('hidden');
+		
+		// 更新場次和局數
+		$card.find('[data-set]').text(`第${match.set}局`);
+		$card.find('[data-match-no]').text(`場次：${matchNo}`);
+		
+		// 恢復投票區域的正常顯示
+		const $votingSection = $card.find('.voting-section');
+		$votingSection.find('.voting-title').html(`
+			<svg class="voting-icon" fill="currentColor" viewBox="0 0 24 24">
+				<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+			</svg>
+			人氣投票
+		`);
+		$votingSection.find('.vote-heart').show();
+		$votingSection.find('.vote-progress-container').html(`
+			<div class="vote-percentages">
+				<span class="percentage-left" data-team1-percentage>50%</span>
+				<span class="percentage-right" data-team2-percentage>50%</span>
+			</div>
+			<div class="vote-progress">
+				<div class="vote-bar team1-bar" data-team1-bar style="width: 50%"></div>
+				<div class="vote-bar team2-bar" data-team2-bar style="width: 50%"></div>
+			</div>
+		`);
 		
 		// 檢查分數變化
-		const matchKey = `${match.field}-${match.matchNo}`;
+		const matchKey = `${match.field}-${matchNo}`;
 		const currentScore = match.setScores[match.setScores.length - 1];
 		const [currentScore1, currentScore2] = currentScore.split(':').map(Number);
 		
