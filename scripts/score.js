@@ -67,6 +67,20 @@ function updateMatchCards(matches) {
 			// 隱藏場次和局數標籤（只在無比賽時）
 			$card.find('[data-set], [data-match-no]').addClass('hidden');
 			
+			// 重置所有比分和文字為預設值
+			$card.find('[data-team1-name]').text('--');
+			$card.find('[data-team2-name]').text('--');
+			$card.find('[data-game-score]').text('--');
+			$card.find('[data-team1-score]').text('-');
+			$card.find('[data-team2-score]').text('-');
+			
+			// 重置各局比分
+			$card.find('[data-set-score]').each(function() {
+				$(this).text('-')
+					.removeClass('team1-win team2-win')
+					.addClass('no-result');
+			});
+			
 			// 修改投票區域顯示無比賽狀態
 			const $votingSection = $card.find('.voting-section');
 			$votingSection.find('.voting-title').html(`
