@@ -41,28 +41,46 @@ function fetchResultsData() {
             }
         });
 
-        // 複決賽隊伍列表 - 從場次19開始的比賽中獲取隊伍
+        // 複決賽隊伍列表 - 從 roundResults 中獲取每個組別前兩名
         const $teamsList = $('.round-robin-teams-list');
         const qualifiedTeams = new Set(); // 使用Set來避免重複的隊伍名稱
         
-        // 從場次19開始的比賽中獲取隊伍
-        response.matches.forEach(match => {
-            const matchNum = chineseNumberMap[match.matchNo];
-            if (matchNum >= 19) {
-                if (match.teams && match.teams.length >= 2) {
-                    qualifiedTeams.add(match.teams[0]);
-                    qualifiedTeams.add(match.teams[1]);
+        // 檢查是否所有前兩名隊伍都有 rank
+        let allRanksAvailable = true;
+        const groupTopTeams = {};
+        
+        // 先整理每個組別的前兩名隊伍
+        response.roundResults.forEach(result => {
+            if (result.rank <= 2) {
+                if (!groupTopTeams[result.group]) {
+                    groupTopTeams[result.group] = [];
+                }
+                groupTopTeams[result.group].push(result);
+                
+                // 如果 rank 是空字串，標記為未完全準備好
+                if (result.rank === '') {
+                    allRanksAvailable = false;
                 }
             }
         });
         
-        // 迭代現有的隊伍卡片並更新內容
-        const teamNamesArray = Array.from(qualifiedTeams);
-        $teamsList.find('.round-robin-team-card').each(function(index) {
-            if (index < teamNamesArray.length) {
-                $(this).text(teamNamesArray[index]);
-            }
-        });
+        // 只有在所有前兩名隊伍都有 rank 時才更新
+        if (allRanksAvailable) {
+            // 將每個組別的前兩名隊伍加入 Set
+            Object.values(groupTopTeams).forEach(teams => {
+                teams.forEach(team => {
+                    qualifiedTeams.add(team.team);
+                });
+            });
+            
+            // 迭代現有的隊伍卡片並更新內容
+            const teamNamesArray = Array.from(qualifiedTeams);
+            $teamsList.find('.round-robin-team-card').each(function(index) {
+                if (index < teamNamesArray.length) {
+                    $(this).text(teamNamesArray[index]);
+                }
+            });
+        }
 
         $('#resultsContainer').show();
         $('#loadingContainer').hide();
