@@ -1,4 +1,4 @@
-const SPREADSHEET_ID = "1wcNSyGv0QQEnjr-5UHOqsmnniSeUSX2F1XNYW23ISZs";
+const SPREADSHEET_ID = "";
 
 function doGet(e) {
   const type = e.parameter.type;
@@ -121,6 +121,9 @@ function handleAnnouncements(){
       content   // 公告內容文字
     });
   }
+
+  // 最下面是最新的公告
+  announcements.reverse();
 
   return ContentService
     .createTextOutput(JSON.stringify({ announcements }, null, 2))
@@ -270,5 +273,3 @@ function handleTeams() {
     .createTextOutput(JSON.stringify({ teams }, null, 2))
     .setMimeType(ContentService.MimeType.JSON);
 }
-
-
