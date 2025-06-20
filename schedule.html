@@ -261,24 +261,47 @@
         <!-- 循環賽卡片 end -->
         <div class="tournament-card bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 relative mx-auto"
             style="max-width: 1200px;">
-            <div class="flex items-center mb-6">
-                <div class="bg-amber-100 rounded-full p-3 mr-4">
-                    <svg fill="#F59e0b" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        x="0px" y="0px" width="28px" height="28px" viewBox="0 0 97.5 97.5"
-                        style="enable-background:new 0 0 97.5 97.5;" xml:space="preserve">
-                        <g>
-                            <path d="M95.5,62.844h-6.164V58.84c0-7.135-5.804-12.938-12.938-12.938H52.445V34.656h6.088c1.104,0,2-0.896,2-2V13.09
-                                c0-1.104-0.896-2-2-2H38.967c-1.104,0-2,0.896-2,2v19.566c0,1.104,0.896,2,2,2h6.087v11.245H21.103
-                                c-7.135,0-12.938,5.804-12.938,12.938v4.004H2c-1.104,0-2,0.896-2,2V84.41c0,1.104,0.896,2,2,2h19.566c1.104,0,2-0.896,2-2V64.844
-                                c0-1.104-0.896-2-2-2h-6.009V58.84c0-3.058,2.487-5.545,5.545-5.545h23.951v9.549h-6.087c-1.104,0-2,0.896-2,2V84.41
-                                c0,1.104,0.896,2,2,2h19.566c1.104,0,2-0.896,2-2V64.844c0-1.104-0.896-2-2-2h-6.087v-9.549h23.951
-                                c3.058,0,5.545,2.487,5.545,5.545v4.004h-6.01c-1.104,0-2,0.896-2,2V84.41c0,1.104,0.896,2,2,2H95.5c1.104,0,2-0.896,2-2V64.844
-                                C97.5,63.739,96.604,62.844,95.5,62.844z" />
-                        </g>
-                    </svg>
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center">
+                    <div class="bg-amber-100 rounded-full p-3 mr-4">
+                        <svg fill="#F59e0b" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            x="0px" y="0px" width="28px" height="28px" viewBox="0 0 97.5 97.5"
+                            style="enable-background:new 0 0 97.5 97.5;" xml:space="preserve">
+                            <g>
+                                <path d="M95.5,62.844h-6.164V58.84c0-7.135-5.804-12.938-12.938-12.938H52.445V34.656h6.088c1.104,0,2-0.896,2-2V13.09
+                                    c0-1.104-0.896-2-2-2H38.967c-1.104,0-2,0.896-2,2v19.566c0,1.104,0.896,2,2,2h6.087v11.245H21.103
+                                    c-7.135,0-12.938,5.804-12.938,12.938v4.004H2c-1.104,0-2,0.896-2,2V84.41c0,1.104,0.896,2,2,2h19.566c1.104,0,2-0.896,2-2V64.844
+                                    c0-1.104-0.896-2-2-2h-6.009V58.84c0-3.058,2.487-5.545,5.545-5.545h23.951v9.549h-6.087c-1.104,0-2,0.896-2,2V84.41
+                                    c0,1.104,0.896,2,2,2h19.566c1.104,0,2-0.896,2-2V64.844c0-1.104-0.896-2-2-2h-6.087v-9.549h23.951
+                                    c3.058,0,5.545,2.487,5.545,5.545v4.004h-6.01c-1.104,0-2,0.896-2,2V84.41c0,1.104,0.896,2,2,2H95.5c1.104,0,2-0.896,2-2V64.844
+                                    C97.5,63.739,96.604,62.844,95.5,62.844z" />
+                            </g>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-orange-800">複決賽</h2>
                 </div>
-                <h2 class="text-2xl sm:text-3xl font-bold text-orange-800">複決賽</h2>
+                
+                <!-- 放大縮小懸浮按鈕 -->
+                <div class="zoom-controls">
+                    <button class="zoom-btn zoom-in" title="放大" aria-label="放大">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                    <button class="zoom-btn zoom-out" title="縮小" aria-label="縮小">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                    <button class="zoom-btn zoom-reset" title="重置" aria-label="重置縮放">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M4 4h6v2H6v4H4V4zm16 0v6h-2V6h-4V4h6zm0 16h-6v-2h4v-4h2v6zm-16 0v-6h2v4h4v2H4z"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
+            
             <div class="tournament-scroll">
                 <div class="tournament-container">
                     <div class="tree">

@@ -101,11 +101,19 @@ function fetchScheduleData() {
 			}
 		});
 
-
-
 		$('#scheduleContainer').show();
 		$('#loadingContainer').hide();
 		$('body').removeClass('loading-active');
+
+        // 在數據載入且DOM渲染完成後，將滾動條置中
+        const scrollBox = $('.tournament-scroll');
+        if (scrollBox.length) {
+            const scrollWidth = scrollBox[0].scrollWidth;
+            const clientWidth = scrollBox[0].clientWidth;
+            const centerPosition = (scrollWidth - clientWidth) / 2;
+            scrollBox.scrollLeft(centerPosition);
+        }
+
     }, function(xhr, status, error) {
         $('#loadingContainer').hide();
         $('body').removeClass('loading-active');
@@ -114,15 +122,110 @@ function fetchScheduleData() {
 }
 
 $(document).ready(function() {
-	// 初始化賽程樹狀圖滾動位置
-	const scrollBox = $('.tournament-scroll');
-	if (scrollBox.length) {
-	    scrollBox.scrollLeft((scrollBox[0].scrollWidth - scrollBox[0].clientWidth) / 2);
-	}
-
 	$('#scheduleContainer').hide();
 	$('#loadingContainer').show();
 	$('body').addClass('loading-active');
-	// 獲取賽程資料
 	fetchScheduleData();
+	
+	// 放大縮小功能
+	initZoomControls();
 }); 
+
+// 放大縮小功能
+function initZoomControls() {
+    let currentZoom = 1;
+    const minZoom = 0.5;
+    const maxZoom = 2.0;
+    const zoomStep = 0.1;
+    
+    const $scrollContainer = $('.tournament-scroll');
+    const $container = $('.tournament-container');
+    const $zoomIn = $('.zoom-in');
+    const $zoomOut = $('.zoom-out');
+    const $zoomReset = $('.zoom-reset');
+    
+    function updateZoomState() {
+        $zoomIn.prop('disabled', currentZoom >= maxZoom);
+        $zoomOut.prop('disabled', currentZoom <= minZoom);
+    }
+    
+    function applyZoom(newZoom) {
+        const scrollBox = $scrollContainer[0];
+        const oldScrollWidth = scrollBox.scrollWidth;
+        const oldScrollLeft = scrollBox.scrollLeft;
+        const viewportWidth = scrollBox.clientWidth;
+
+        const centerPoint = oldScrollLeft + viewportWidth / 2;
+        const centerRatio = oldScrollWidth > 0 ? centerPoint / oldScrollWidth : 0;
+
+        currentZoom = parseFloat(newZoom.toFixed(2));
+        $container.css('--zoom', currentZoom);
+        updateZoomState();
+
+        // 等待 DOM 更新縮放等級後再計算新的滾動位置
+        setTimeout(() => {
+            const newScrollWidth = scrollBox.scrollWidth;
+            let newScrollLeft = (newScrollWidth * centerRatio) - (viewportWidth / 2);
+            
+            // 限制值在可滾動範圍內
+            newScrollLeft = Math.max(0, Math.min(newScrollLeft, newScrollWidth - viewportWidth));
+            
+            // 重置時使用動畫以獲得更平滑的過渡效果
+            if (newZoom === 1) {
+                $scrollContainer.animate({ scrollLeft: newScrollLeft }, 300);
+            } else {
+                $scrollContainer.scrollLeft(newScrollLeft);
+            }
+        }, 0); // 使用 timeout 0 等待下一個渲染週期
+    }
+    
+    $zoomIn.on('click', function() {
+        if (currentZoom < maxZoom) {
+            applyZoom(currentZoom + zoomStep);
+        }
+    });
+    
+    $zoomOut.on('click', function() {
+        if (currentZoom > minZoom) {
+            applyZoom(currentZoom - zoomStep);
+        }
+    });
+    
+    $zoomReset.on('click', function() {
+        if (currentZoom === 1) return;
+        applyZoom(1);
+    });
+    
+    $(document).on('keydown', function(e) {
+        if (window.location.pathname.includes('schedule.html')) {
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === '=' || e.key === '+') {
+                    e.preventDefault();
+                    $zoomIn.click();
+                } else if (e.key === '-') {
+                    e.preventDefault();
+                    $zoomOut.click();
+                } else if (e.key === '0') {
+                    e.preventDefault();
+                    $zoomReset.click();
+                }
+            }
+        }
+    });
+    
+    $scrollContainer.on('wheel', function(e) {
+        if (e.ctrlKey || e.metaKey) {
+            e.preventDefault();
+            const delta = e.originalEvent.deltaY > 0 ? -1 : 1;
+            const newZoom = currentZoom + delta * zoomStep;
+            
+            if (newZoom >= minZoom && newZoom <= maxZoom) {
+                applyZoom(newZoom);
+            }
+        }
+    });
+
+    // 設定初始縮放
+    $container.css('--zoom', currentZoom);
+    updateZoomState();
+}
