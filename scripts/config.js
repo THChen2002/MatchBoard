@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // Firebase configuration for MatchBoard project
 const firebaseConfig = {
@@ -16,6 +17,7 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase services
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 // Export for use in other modules
-export { app, auth, firebaseConfig }; 
+export { app, auth, db, firebaseConfig }; 

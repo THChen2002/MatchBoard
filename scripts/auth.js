@@ -1,5 +1,6 @@
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 import { auth } from "./config.js";
+import { queryDocuments, getDocument, updateDocument, addDocument } from "./firestore.js";
 
 // Initialize Google Auth Provider
 const provider = new GoogleAuthProvider();
@@ -71,6 +72,34 @@ function hideLogoutModal() {
 	}
 }
 
+// 處理用戶登入後的資料庫操作
+async function handleUserLogin(user) {
+	try {
+		// 檢查用戶是否已經存在於資料庫中
+		const existingUser = await getDocument('users', user.uid);
+		
+		if (existingUser) {
+			// 用戶已存在，更新最後登入時間
+			await updateDocument('users', user.uid, {
+				lastLogin: new Date()
+			});
+		} else {
+			// 用戶不存在，新增用戶到資料庫
+			const userData = {
+				email: user.email,
+				name: user.displayName || user.email.split('@')[0], // 如果沒有displayName，使用email前綴
+				permission: 'user', // 預設權限為user
+				createdAt: new Date(),
+				lastLogin: new Date()
+			};
+
+			await addDocument('users', userData, user.uid);
+		}
+	} catch (error) {
+		console.error('處理用戶登入資料庫操作失敗:', error);
+	}
+}
+
 // 確認登出
 function confirmLogout() {
 	hideLogoutModal();
@@ -123,10 +152,14 @@ function setupAuthUI() {
 	adminBtn.addClass("auth-loading");
 
 	// 綁定桌面版按鈕事件
-	loginBtn.on("click", () => {
-		signInWithPopup(auth, provider).catch(err => {
-			// Handle login error silently or show user-friendly message
-		});
+	loginBtn.on("click", async () => {
+		try {
+			const result = await signInWithPopup(auth, provider);
+			// 用戶成功登入後，處理資料庫操作
+			await handleUserLogin(result.user);
+		} catch (err) {
+			console.error('登入失敗:', err);
+		}
 	});
 
 	logoutBtn.on("click", () => {
@@ -152,10 +185,15 @@ function setupAuthUI() {
 		mAdminBtn.addClass("auth-loading");
 
 		// 綁定手機版按鈕事件
-		mLoginBtn.on("click", () => {
-			signInWithPopup(auth, provider).catch(err => {
+		mLoginBtn.on("click", async () => {
+			try {
+				const result = await signInWithPopup(auth, provider);
+				// 用戶成功登入後，處理資料庫操作
+				await handleUserLogin(result.user);
+			} catch (err) {
+				console.error('手機版登入失敗:', err);
 				// Handle mobile login error silently
-			});
+			}
 		});
 
 		mLogoutBtn.on("click", () => {

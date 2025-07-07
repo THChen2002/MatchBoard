@@ -42,7 +42,7 @@ function fetchAndStoreData(type, successCallback, errorCallback, data = {}) {
 
 // 初始化所有資料
 function initializeData() {
-    const dataTypes = ['marquee', 'announcements', 'schedule', 'results', 'teams'];
+    const dataTypes = ['marquee', 'announcements', 'results', 'teams'];
 
     dataTypes.forEach(type => {
         if (!localStorage.getItem(type)) {
