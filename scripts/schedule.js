@@ -20,8 +20,8 @@ function fetchScheduleData() {
             const matchData = response.matches.find(match => match.matchNo === matchNo);
 
             if (matchData) {
-				// 右上角比分要對調
-				if ($this.hasClass('score-top-right-side')) {
+				// 左上角右上角比分要對調
+				if (!$this.hasClass('score-bottom-side')) {
 					const scores = matchData.gameScore.split(':');
 					const blueScore = parseInt(scores[0]);
 					const redScore = parseInt(scores[1]);
@@ -86,7 +86,7 @@ function fetchScheduleData() {
 				const blueScore = parseInt(scores[0]);
 				const redScore = parseInt(scores[1]);
 				
-				$this.find('.team-blue .score-blube').text(blueScore);
+				$this.find('.team-blue .score-blue').text(blueScore);
 				$this.find('.team-red .score-red').text(redScore);
 				
 				// 判斷贏家並加上 winning-team class
